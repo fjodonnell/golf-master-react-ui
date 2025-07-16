@@ -17,7 +17,7 @@
     "lint": "eslint",
     "serve": "vite preview",
     "start": "vite",
-"predeploy": "npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
