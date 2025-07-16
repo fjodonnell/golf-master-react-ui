@@ -2,7 +2,7 @@
   "name": "@coreui/coreui-free-react-admin-template",
   "version": "5.4.0",
   "description": "CoreUI Free React Admin Template",
-  "homepage": ".",
+  "homepage": "https://fjodonnell.github.io/golf-master-react-ui",
   "bugs": {
     "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
   },
@@ -16,7 +16,9 @@
     "build": "vite build",
     "lint": "eslint",
     "serve": "vite preview",
-    "start": "vite"
+    "start": "vite",
+"predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@coreui/chartjs": "^4.1.0",
