@@ -48,6 +48,12 @@ body {
   }
 }
 
+.table-padding td,
+.table-padding th {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .header > .container-fluid + .container-fluid {
   min-height: 3rem;
 }
