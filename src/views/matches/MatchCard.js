@@ -358,7 +358,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                     updated.playerLoser = loser;
                                 }
 
-                                await fetch(`http://localhost:8080/match/${match.matchId}`, {
+                                await fetch(`https://golf-master-backend.onrender.com/match/${match.matchId}`, {
                                     method: 'PUT',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify(updated),

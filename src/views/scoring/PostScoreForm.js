@@ -45,7 +45,7 @@ const PostScoreForm = ({ selectedPlayer, onScorePosted }) => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch('http://localhost:8080/event/')
+        const res = await fetch('https://golf-master-backend.onrender.com/event/')
         const data = await res.json()
         setEvents(data)
       } catch (err) {
@@ -69,7 +69,7 @@ const PostScoreForm = ({ selectedPlayer, onScorePosted }) => {
       setLoadingRounds(true)
       try {
         const res = await fetch(
-          `http://localhost:8080/round/eventName/${encodeURIComponent(selectedEvent)}`
+          `https://golf-master-backend.onrender.com/round/eventName/${encodeURIComponent(selectedEvent)}`
         )
         const data = await res.json()
         const sortedRounds = data.sort((a, b) => a.roundNumber - b.roundNumber)
@@ -119,7 +119,7 @@ const PostScoreForm = ({ selectedPlayer, onScorePosted }) => {
     setFeedback(null)
 
     try {
-      const res = await fetch('http://localhost:8080/score/create', {
+      const res = await fetch('https://golf-master-backend.onrender.com/score/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

@@ -54,7 +54,7 @@ const Scoring = () => {
     useEffect(() => {
         const fetchPlayers = async () => {
             try {
-                const response = await fetch('http://localhost:8080/player/')
+                const response = await fetch('https://golf-master-backend.onrender.com/player/')
                 const data = await response.json()
                 setPlayers(data)
             } catch (err) {
@@ -76,7 +76,7 @@ const Scoring = () => {
             setLoadingScores(true)
             try {
                 const response = await fetch(
-                    `http://localhost:8080/score/playerId/${selectedPlayer.playerId}`
+                    `https://golf-master-backend.onrender.com/score/playerId/${selectedPlayer.playerId}`
                 )
                 const data = await response.json()
                 setPlayerScores(data)

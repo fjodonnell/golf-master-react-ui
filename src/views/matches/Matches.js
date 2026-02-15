@@ -21,7 +21,7 @@ const Matches = () => {
   // Fetch events (on load)
   useEffect(() => {
     axios
-      .get('http://localhost:8080/event/')
+      .get('https://golf-master-backend.onrender.com/event/')
       .then((res) => setEvents(res.data))
       .catch((err) => console.error(err))
   }, [])
@@ -31,7 +31,7 @@ const Matches = () => {
     setLoading(true) // 🔹 start loading
     try {
       const res = await axios.get(
-        `http://localhost:8080/match/eventName/${selectedEvent}`
+        `https://golf-master-backend.onrender.com/match/eventName/${selectedEvent}`
       )
       const sorted = res.data.sort((a, b) => a.matchNumber - b.matchNumber)
       setMatches(sorted)
@@ -51,7 +51,7 @@ const Matches = () => {
   const fetchRoundScores = useCallback(async (roundId) => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/score/roundId/${roundId}`
+        `https://golf-master-backend.onrender.com/score/roundId/${roundId}`
       )
       return res.data
     } catch (err) {
