@@ -26,7 +26,7 @@ const MainChart = ({ metric }) => {
     const fetchScores = async () => {
       try {
         const response = await fetch(
-          'http://localhost:8080/score/eventName/Tournament%20du%20Sol%202025'
+          'https://golf-master-backend.onrender.com/score/eventName/Tournament%20du%20Sol%202025'
         )
         const scores = await response.json()
 

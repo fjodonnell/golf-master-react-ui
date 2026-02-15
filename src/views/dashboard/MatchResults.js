@@ -21,7 +21,7 @@ export const MatchResultsTable = ({ eventName }) => {
     const fetchMatches = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/match/eventName/${encodeURIComponent(eventName)}`
+          `https://golf-master-backend.onrender.com/match/eventName/${encodeURIComponent(eventName)}`
         );
         const data = await response.json();
         setMatches(data);

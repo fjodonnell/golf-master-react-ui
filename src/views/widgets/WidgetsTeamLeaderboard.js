@@ -8,7 +8,7 @@ export const WidgetsTeamLeaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/leaderboard/teamLeaderboard')
+        const response = await axios.get('https://golf-master-backend.onrender.com/leaderboard/teamLeaderboard')
         setLeaderboardItems(response.data)
       } catch (error) {
         console.error('Error fetching leaderboard data:', error)
