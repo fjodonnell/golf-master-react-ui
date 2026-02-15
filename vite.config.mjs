@@ -5,7 +5,7 @@ import autoprefixer from 'autoprefixer'
 
 export default defineConfig(() => {
   return {
-    base: '/golf-master-react-ui/',
+    base: './',
     build: {
       outDir: 'build',
     },
