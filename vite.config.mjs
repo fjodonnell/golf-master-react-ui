@@ -7,7 +7,7 @@ export default defineConfig(() => {
   return {
     base: '/golf-master-react-ui',
     build: {
-      outDir: 'build',
+      outDir: 'dist',
     },
     css: {
       postcss: {
