@@ -1,0 +1,9 @@
+{
+    "name": "My GitHub Pages Site",
+    "short_name": "MySite",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000"
+  }
+  
