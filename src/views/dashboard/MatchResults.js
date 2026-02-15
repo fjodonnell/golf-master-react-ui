@@ -11,6 +11,7 @@ import {
   CTableHeaderCell,
   CTableDataCell,
 } from '@coreui/react';
+import { formatMatchResult } from '../../utils/matchFormatters';
 
 export const MatchResultsTable = ({ eventName }) => {
   const [matches, setMatches] = useState([]);
@@ -84,9 +85,7 @@ export const MatchResultsTable = ({ eventName }) => {
                   {getWinnerName(match)}
                 </CTableDataCell>
                 <CTableDataCell>
-                  {match.holesWonBy != null && match.holesRemaining != null
-                    ? `${match.holesWonBy} & ${match.holesRemaining}`
-                    : ''}
+                {formatMatchResult(match.holesWonBy, match.holesRemaining)}
                 </CTableDataCell>
                 <CTableDataCell className={getTeamColor(match.teamLoser?.teamName)}>
                   {getLoserName(match)}

@@ -5,28 +5,28 @@ import { getStyle } from '@coreui/utils'
 const MainChart = ({ metric }) => {
   const chartRef = useRef(null)
   const [chartData, setChartData] = useState({
-    labels: ['R1', 'R2', 'R3', 'R4', 'R5', 'R6'],
+    labels: ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7'],
     datasets: [],
   })
 
   const yAxisLimits = {
-    scores: { min: 70, max: 100 },
+    scores: { min: 70, max: 86 },
     pars: { min: 0, max: 16 },
     birdies: { min: 0, max: 8 },
   }
 
   const playersConfig = [
     { id: 'fjodonnell', label: 'FJ', color: 'success' },
-    { id: 'zrobinson', label: 'Zach', color: 'info' },
-    { id: 'tfortunato', label: 'Tom', color: 'warning' },
-    { id: 'rschuetz', label: 'Rob', color: 'danger' },
+    { id: 'zhuston', label: 'Zach', color: 'info' },
+    { id: 'acarpenter', label: 'Carp', color: 'warning' },
+    { id: 'wghidotti', label: 'Bill', color: 'danger' },
   ]
 
   useEffect(() => {
     const fetchScores = async () => {
       try {
         const response = await fetch(
-          'http://localhost:8080/score/eventName/Congressional%20Cup%202025'
+          'http://localhost:8080/score/eventName/Tournament%20du%20Sol%202025'
         )
         const scores = await response.json()
 
@@ -63,7 +63,7 @@ const MainChart = ({ metric }) => {
         }))
 
         setChartData({
-          labels: ['R1', 'R2', 'R3', 'R4', 'R5', 'R6'],
+          labels: ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7'],
           datasets,
         })
       } catch (error) {

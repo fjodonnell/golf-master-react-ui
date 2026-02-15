@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import classNames from 'classnames'
 import {
   CAvatar,
   CButton,
   CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
-  CCardHeader,
   CCol,
-  CProgress,
   CRow,
   CTable,
   CTableBody,
@@ -22,27 +18,26 @@ import CIcon from '@coreui/icons-react'
 import { cifUs, cilPeople } from '@coreui/icons'
 
 // ✅ Avatar imports
-import Francis from 'src/assets/images/avatars/Francis.jpg'
-import Zachary from 'src/assets/images/avatars/Zachary.jpg'
-import Tommy from 'src/assets/images/avatars/Tommy.jpg'
-import Robert from 'src/assets/images/avatars/Robert.jpg'
+import fjodonnell from 'src/assets/images/avatars/fjodonnell.jpg'
+import zhuston from 'src/assets/images/avatars/zhuston.jpg'
+import acarpenter from 'src/assets/images/avatars/acarpenter.jpg'
+import wghidotti from 'src/assets/images/avatars/wghidotti.jpg'
+import rschuetz from 'src/assets/images/avatars/rschuetz.jpg'
+import tfortunato from 'src/assets/images/avatars/tfortunato.jpg'
+import zrobinson from 'src/assets/images/avatars/zrobinson.jpg'
 
 import MainChart from './MainChart'
-import { WidgetsTeamLeaderboard } from '../widgets/WidgetsTeamLeaderboard'
 import { MatchResultsTable } from './MatchResults'
 
-const playersList = [
-  { title: 'FJ', color: 'success' },
-  { title: 'Zach', color: 'info' },
-  { title: 'Tom', color: 'warning' },
-  { title: 'Rob', color: 'danger' },
-]
 
 const avatarMap = {
-  Francis: Francis,
-  Zachary: Zachary,
-  Tommy: Tommy,
-  Robert: Robert,
+  Francis: fjodonnell,
+  Zachary: zhuston,
+  Alexander: acarpenter,
+  William: wghidotti,
+  Robert: rschuetz,
+  Tommy: tfortunato,
+  ZRob: zrobinson
 }
 
 const Dashboard = () => {
@@ -50,7 +45,7 @@ const Dashboard = () => {
   const [scores, setScores] = useState([]) // ✅ scores state
   const [chartType, setChartType] = useState('Scores') // ✅ chart type toggle
 
-  // ✅ Fetch leaderboard
+  // Fetch leaderboard
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
@@ -72,11 +67,12 @@ const Dashboard = () => {
               state: state,
             },
             country: { name: 'USA', flag: cifUs },
-            strokesToPar: item.totalPoints,
+            totalPoints: item.totalPoints,
+            strokesToPar: item.strokesToPar
           }
         })
 
-        mappedPlayers.sort((a, b) => a.strokesToPar - b.strokesToPar)
+        mappedPlayers.sort((a, b) => b.totalPoints - a.totalPoints)
         setPlayerTable(mappedPlayers)
       } catch (error) {
         console.error('Error fetching leaderboard:', error)
@@ -91,7 +87,7 @@ const Dashboard = () => {
     const fetchScores = async () => {
       try {
         const response = await fetch(
-          'http://localhost:8080/score/eventName/Congressional%20Cup%202025',
+          'http://localhost:8080/score/eventName/Tournament%20du%20Sol%202025',
         )
         const data = await response.json()
         setScores(data)
@@ -103,10 +99,11 @@ const Dashboard = () => {
     fetchScores()
   }, [])
 
+  const formatScoreToPar = (value) =>
+    value == null ? '-' : value === 0 ? 'E' : value > 0 ? `+${value}` : value;  
+
   return (
     <>
-      <WidgetsTeamLeaderboard className="mb-4" />
-
       <CCard className="mb-4">
         <CTable align="middle" className="mb-0 border" hover responsive>
           <CTableHead className="text-nowrap">
@@ -118,7 +115,8 @@ const Dashboard = () => {
               <CTableHeaderCell className="bg-body-tertiary text-center">
                 Country
               </CTableHeaderCell>
-              <CTableHeaderCell className="bg-body-tertiary">Strokes to Par</CTableHeaderCell>
+              <CTableHeaderCell className="bg-body-tertiary text-center">Total Points</CTableHeaderCell>
+              <CTableHeaderCell className="bg-body-tertiary text-center">Strokes to Par</CTableHeaderCell>
             </CTableRow>
           </CTableHead>
           <CTableBody>
@@ -138,8 +136,11 @@ const Dashboard = () => {
                 <CTableDataCell className="text-center">
                   <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
                 </CTableDataCell>
-                <CTableDataCell>
-                  +{item.strokesToPar}
+                <CTableDataCell className="text-center">
+                  {item.totalPoints}
+                </CTableDataCell>
+                <CTableDataCell className="text-center">
+                  {formatScoreToPar(item.strokesToPar)}
                 </CTableDataCell>
               </CTableRow>
             ))}
@@ -154,7 +155,7 @@ const Dashboard = () => {
               <h4 id="traffic" className="card-title mb-0">
                 Player Scoring Trend
               </h4>
-              <div className="small text-body-secondary">Congressional Cup 2025</div>
+              <div className="small text-body-secondary">Tournament du Sol 2025</div>
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
               <CButtonGroup className="float-end me-3">
@@ -196,7 +197,7 @@ const Dashboard = () => {
         </CCardFooter> */}
       </CCard>
       <CCard className="mb-4">
-        <MatchResultsTable eventName="Congressional Cup 2025" />
+        <MatchResultsTable eventName="Tournament du Sol 2025" />
       </CCard>
 
     </>
