@@ -10,13 +10,16 @@ import {
   CRow,
 } from '@coreui/react'
 
+// Dynamic base path for GitHub Pages
+const publicUrl = import.meta.env.BASE_URL;
+
 // 🧾 Mock articles data
 const articles = [
     {
       id: 1,
       title: 'Huston Looks to Go Back to Back in 2026',
       publishedAt: '2025-11-10T09:00:00',
-      imageUrl: 'src/assets/images/ZachSwinging.jpg',
+      imageUrl: `${publicUrl}avatars/ZachSwinging.jpg`,
       summary:
         'Coming off a monumental TDS victory in 2025, the 32 year old Utahn feels that his best golf is still ahead. Find out why in our exclusive interview with the champ.',
       author: 'Tournament du Sol Media Team',
@@ -39,7 +42,38 @@ const articles = [
   
   <p>The 2026 Tournament du Sol is shaping up to be one for the ages. And if Huston has his way, it may end the same way as last year: with the champ walking tall and a familiar smirk crossing his face.</p>
   `
-    }
+    },
+    {
+        id: 2,
+        title: 'Carpenter Eyes Redemption After La Purisima Nightmare',
+        publishedAt: '2026-02-15T09:00:00',
+        imageUrl: `${publicUrl}avatars/AlexSwinging.jpg`,
+        summary:
+          'A two-time champion, a haunted putter, and unfinished business — Alex Carpenter enters 2026 determined to reclaim his place at the top of TDS.',
+        author: 'Tournament du Sol Media Team',
+        content: `
+        <p>Few players in Tournament du Sol history have matched the sustained excellence of Alex Carpenter. A back-to-back champion in 2023 and 2024, Carpenter built a reputation as the tournament’s steadiest competitor — the kind of player who rarely beat himself and almost never blinked under pressure.</p>
+      
+        <p>His first title came in unforgettable fashion. Facing FJ O'Donnell at Eagle Falls in 2023, Carpenter stood on the final hole all square and needing something special. What followed was the stuff of TDS lore — a pure approach and a clutch birdie that flipped the match and delivered a 1 UP victory. It was a breakthrough moment that announced Carpenter as a force to be reckoned with.</p>
+      
+        <p>If 2023 was dramatic, 2024 was clinical. Carpenter squared off against Will Ghidotti and methodically dismantled him, capitalizing on his opponent's erratic drives and mistakes with relentless consistency. Fairways, greens, two putts — rinse and repeat. It wasn’t flashy, but it was dominant. Two years, two trophies.</p>
+      
+        <p>By the time the 2025 tournament approached, talk of a three-peat was everywhere. Analysts called him the safest pick in the field. Then came La Purisima.</p>
+      
+        <p>From the opening round, Carpenter’s putter went ice cold. Short misses piled up. Momentum vanished. Confidence disappeared. The normally unshakeable champion looked human. After day three, in a moment he later laughed about, Carpenter made an impulse stop at PGA Superstore and bought a brand-new putter, hoping for a spark.</p>
+      
+        <p>No spark came. The struggles stayed.</p>
+      
+        <p>La Purisima left a mark. “<em>I swear that place has it out for me,</em>” Carpenter said recently. “<em>I’ve had bad rounds before, but nothing like that. I love great courses, but La Purisima and I? We’re not on speaking terms.</em>”</p>
+
+        <p>When asked for his thoughts on 2026 TDS course selections, Carpenter was emphatic in his response. “<em>I'll play anything that isn’t La Purisima. As long as it doesn’t involve La Purisima, I’m ok with it.</em>”</p>
+      
+        <p>Even so, counting Carpenter out would be a mistake. Teammates and competitors alike still call him the most consistent player TDS has seen. His track record proves it, and champions rarely stay down for long.</p>
+      
+        <p>As 2026 approaches, Carpenter isn’t talking about curses or equipment. He’s talking about preparation, patience, and getting back to the formula that made him great. A return to the TDS Final would surprise no one — and another trophy might surprise even fewer.</p>
+        `
+      }
+      
   ]
 
 const News = () => {
