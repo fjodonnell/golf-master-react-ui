@@ -333,25 +333,25 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                             onClick={async () => {
                                 setSaving(true);
                             
-                                // 1. Identify the winners/losers from the existing match data
+                                // 1. Map the winners/losers exactly as before
                                 const teamWinner = isTeamMatch ? match.teams.find(t => t.teamName === winnerId) || null : null;
                                 const teamLoser = isTeamMatch ? match.teams.find(t => t.teamName !== winnerId) || null : null;
                                 const playerWinner = isSinglesMatch ? match.players.find(p => p.playerId === winnerId) || null : null;
                                 const playerLoser = isSinglesMatch ? match.players.find(p => p.playerId !== winnerId) || null : null;
                             
-                                // 2. Build a "Flat" payload. 
-                                // We send the matchId so the backend knows which record to update.
+                                // 2. Build the payload with the CRITICAL round ID
                                 const updated = {
-                                    matchId: match.matchId,
-                                    matchName: match.matchName, // Included in case backend requires it
+                                    ...match, // Keep the existing structure
                                     holesWonBy: Number(holesWon),
                                     holesRemaining: Number(holesRemainingInput),
-                                    teamWinner: teamWinner,
-                                    teamLoser: teamLoser,
-                                    playerWinner: playerWinner,
-                                    playerLoser: playerLoser
-                                    // Note: We are EXCLUDING 'round', 'teams', 'players', and 'scores' 
-                                    // to prevent circular reference loops.
+                                    // Overwrite the round with just the ID to prevent circular nesting
+                                    round: {
+                                        roundId: match.round.roundId
+                                    },
+                                    teamWinner,
+                                    teamLoser,
+                                    playerWinner,
+                                    playerLoser
                                 };
                             
                                 try {
@@ -362,18 +362,15 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                     });
                             
                                     if (!response.ok) {
-                                        // This will help us see the REAL backend error if it still fails
                                         const errorText = await response.text();
-                                        console.error('Server Error Response:', errorText);
-                                        alert(`Save failed: ${response.status}`);
+                                        console.error('Server Error:', errorText);
+                                        alert(`Error: ${response.status}`);
                                     } else {
-                                        if (typeof refreshMatches === 'function') {
-                                            await refreshMatches();
-                                        }
+                                        if (typeof refreshMatches === 'function') await refreshMatches();
                                         setShowUpdateForm(false);
                                     }
                                 } catch (err) {
-                                    console.error('Network/Fetch Error:', err);
+                                    console.error('Fetch Error:', err);
                                 } finally {
                                     setSaving(false);
                                 }
