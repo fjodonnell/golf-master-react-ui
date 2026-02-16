@@ -331,31 +331,37 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                             onClick={async () => {
                                 setSaving(true);
                             
-                                // 1. Identify winners/losers
-                                const teamWinner = isTeamMatch ? match.teams.find(t => t.teamName === winnerId) : null;
-                                const teamLoser = isTeamMatch ? match.teams.find(t => t.teamName !== winnerId) : null;
-                                const playerWinner = isSinglesMatch ? match.players.find(p => p.playerId === winnerId) : null;
-                                const playerLoser = isSinglesMatch ? match.players.find(p => p.playerId !== winnerId) : null;
+                                // 1. Initialize result variables
+                                let teamWinner = null;
+                                let teamLoser = null;
+                                let playerWinner = null;
+                                let playerLoser = null;
                             
-                                // 2. Build the payload to match the Java Annotations
+                                // 2. Branch logic strictly by match type
+                                if (isTeamMatch) {
+                                    teamWinner = match.teams.find(t => t.teamName === winnerId) || null;
+                                    teamLoser = match.teams.find(t => t.teamName !== winnerId) || null;
+                                } else if (isSinglesMatch) {
+                                    playerWinner = match.players.find(p => p.playerId === winnerId) || null;
+                                    playerLoser = match.players.find(p => p.playerId !== winnerId) || null;
+                                }
+                            
+                                // 3. Build payload to satisfy Java @JsonIncludeProperties and @JsonIgnoreProperties
                                 const updated = {
                                     matchId: match.matchId,
                                     matchName: match.matchName,
-                                    matchNumber: match.matchNumber, // Kept as requested
+                                    matchNumber: match.matchNumber,
                                     holesWonBy: Number(holesWon),
                                     holesRemaining: Number(holesRemainingInput),
                                     
-                                    // Match the @ManyToOne Round (Slim version)
+                                    // Slim Round object
                                     round: { roundId: match.round.roundId },
                             
-                                    // Match @JsonIncludeProperties("playerId") 
-                                    // We send only the IDs to avoid the "valueDes" null error
+                                    // Flattened lists for ManyToMany persistence
                                     players: match.players?.map(p => ({ playerId: p.playerId })) || [],
-                                    
-                                    // Match @JsonIgnoreProperties({"matches"}) for Teams
                                     teams: match.teams?.map(t => ({ teamName: t.teamName })) || [],
                             
-                                    // Winners/Losers (matching the same slim ID-only format)
+                                    // Mutually exclusive winners/losers
                                     teamWinner: teamWinner ? { teamName: teamWinner.teamName } : null,
                                     teamLoser: teamLoser ? { teamName: teamLoser.teamName } : null,
                                     playerWinner: playerWinner ? { playerId: playerWinner.playerId } : null,
