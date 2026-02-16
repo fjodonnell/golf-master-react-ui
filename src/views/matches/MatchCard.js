@@ -239,23 +239,21 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
 
                 {/* Expand Button */}
                 <div className="d-flex justify-content-center mt-3">
-                    {match.holesWonBy ? (
-                        // Match already played → Normal collapse toggle
-                        <CButton color="info" variant="outline" onClick={handleToggle}>
-                            {expanded ? 'Hide Match Details' : 'View Match Details'}
-                        </CButton>
-                    ) : (
-                        // Match not played → Update Result
-                        <CButton
-                            color="warning"
-                            variant="outline"
-                            onClick={() => setShowUpdateForm((prev) => !prev)}
-                        >
-                            {showUpdateForm ? 'Cancel' : 'Update Result'}
-                        </CButton>
-                    )}
-
-                </div>
+    {/* Using !== null handles the case where the value is 0 */}
+    {match.holesWonBy !== null ? (
+        <CButton color="info" variant="outline" onClick={handleToggle}>
+            {expanded ? 'Hide Match Details' : 'View Match Details'}
+        </CButton>
+    ) : (
+        <CButton
+            color="warning"
+            variant="outline"
+            onClick={() => setShowUpdateForm((prev) => !prev)}
+        >
+            {showUpdateForm ? 'Cancel' : 'Update Result'}
+        </CButton>
+    )}
+</div>
                 {showUpdateForm && (
                     <div
                         className="mt-3 p-3"
