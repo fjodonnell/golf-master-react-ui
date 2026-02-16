@@ -1,29 +1,4 @@
-import React, { useState } from 'react'
-import {
-  CCard,
-  CCardBody,
-  CCardImage,
-  CCardTitle,
-  CCardText,
-  CButton,
-  CCol,
-  CRow,
-} from '@coreui/react'
-
-// Dynamic base path for GitHub Pages
-const publicUrl = import.meta.env.BASE_URL;
-
-// 🧾 Mock articles data
-const articles = [
-    {
-      id: 1,
-      title: 'Huston Looks to Go Back to Back in 2026',
-      publishedAt: '2025-11-10T09:00:00',
-      imageUrl: `${publicUrl}photos/ZachSwinging.jpg`,
-      summary:
-        'Coming off a monumental TDS victory in 2025, the 32 year old Utahn feels that his best golf is still ahead. Find out why in our exclusive interview with the champ.',
-      author: 'Tournament du Sol Media Team',
-      content: `
+import{a as l,j as t}from"./index-BS_zdARw.js";import{C as h,a as d}from"./CRow-CqzNtRCX.js";import{C as m,a as p}from"./CCardBody-7-fIuHcb.js";import{b as u,C as c,a as g}from"./CCardTitle-QHAllXD1.js";import{a as f}from"./index.esm-DR8Bd-lA.js";const n="/golf-master-react-ui/",w=[{id:1,title:"Huston Looks to Go Back to Back in 2026",publishedAt:"2025-11-10T09:00:00",imageUrl:`${n}avatars/ZachSwinging.jpg`,summary:"Coming off a monumental TDS victory in 2025, the 32 year old Utahn feels that his best golf is still ahead. Find out why in our exclusive interview with the champ.",author:"Tournament du Sol Media Team",content:`
   <p>After years of near-misses and heartbreak, Zach Huston finally broke through in 2025 — and he didn’t just win, he <em>dominated</em>. Now, as the 2026 Tournament du Sol looms, the reigning champion returns with one goal in mind: go back-to-back.</p>
   
   <p>For the first four years of TDS, Huston couldn’t quite get over the hump. Each season seemed to end the same way — flashes of brilliance followed by late-round struggles that kept him from reaching the prestigious TDS Final. His biggest critic wasn’t a journalist or fan, but his longtime rival and friend, Will Ghidotti, who loved to remind him, “<em>Make a TDS Final, then talk to me.</em>”</p>
@@ -41,17 +16,7 @@ const articles = [
   <p>Now, one year later, the target is squarely on Huston’s back. But if 2025 taught us anything, it’s that Zach Huston doesn’t shy away from pressure — he thrives in it.</p>
   
   <p>The 2026 Tournament du Sol is shaping up to be one for the ages. And if Huston has his way, it may end the same way as last year: with the champ walking tall and a familiar smirk crossing his face.</p>
-  `
-    },
-    {
-        id: 2,
-        title: 'Carpenter Eyes Redemption After La Purisima Nightmare',
-        publishedAt: '2026-02-15T09:00:00',
-        imageUrl: `${publicUrl}photos/AlexSwinging.jpg`,
-        summary:
-          'A two-time champion, a haunted putter, and unfinished business — Alex Carpenter enters 2026 determined to reclaim his place at the top of TDS.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+  `},{id:2,title:"Carpenter Eyes Redemption After La Purisima Nightmare",publishedAt:"2026-02-15T09:00:00",imageUrl:`${n}avatars/AlexSwinging.jpg`,summary:"A two-time champion, a haunted putter, and unfinished business — Alex Carpenter enters 2026 determined to reclaim his place at the top of TDS.",author:"Tournament du Sol Media Team",content:`
         <p>Few players in Tournament du Sol history have matched the sustained excellence of Alex Carpenter. A back-to-back champion in 2023 and 2024, Carpenter built a reputation as the tournament’s steadiest competitor — the kind of player who rarely beat himself and almost never blinked under pressure.</p>
       
         <p>His first title came in unforgettable fashion. Facing FJ O'Donnell at Eagle Falls in 2023, Carpenter stood on the final hole all square and needing something special. What followed was the stuff of TDS lore — a pure approach and a clutch birdie that flipped the match and delivered a 1 UP victory. It was a breakthrough moment that announced Carpenter as a force to be reckoned with.</p>
@@ -71,72 +36,4 @@ const articles = [
         <p>Even so, counting Carpenter out would be a mistake. Teammates and competitors alike still call him the most consistent player TDS has seen. His track record proves it, and champions rarely stay down for long.</p>
       
         <p>As 2026 approaches, Carpenter isn’t talking about curses or equipment. He’s talking about preparation, patience, and getting back to the formula that made him great. A return to the TDS Final would surprise no one — and another trophy might surprise even fewer.</p>
-        `
-      }
-      
-  ]
-
-const News = () => {
-  const [expandedArticleId, setExpandedArticleId] = useState(null)
-
-  const toggleExpand = (id) => {
-    setExpandedArticleId(expandedArticleId === id ? null : id)
-  }
-
-  // Sort newest to oldest
-  const sortedArticles = [...articles].sort(
-    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
-  )
-
-  return (
-    <div className="p-4">
-      <h2 className="text-center mb-4 fw-bold">Tournament du Sol News</h2>
-
-      <CRow className="justify-content-center">
-        {sortedArticles.map((article) => (
-          <CCol md={8} key={article.id} className="mb-4">
-            <CCard className="shadow-sm border-0">
-              <CCardImage
-                orientation="top"
-                src={article.imageUrl}
-                style={{ objectFit: 'cover', height: '280px' }}
-              />
-              <CCardBody>
-                <CCardTitle className="fw-bold fs-4 mb-2">
-                  {article.title}
-                </CCardTitle>
-                <p className="text-muted mb-1">
-                  By {article.author} •{' '}
-                  {new Date(article.publishedAt).toLocaleDateString()}
-                </p>
-
-                {expandedArticleId === article.id ? (
-  <div
-  className="mt-3"
-  style={{ lineHeight: '1.6', fontSize: '1rem' }}
-  dangerouslySetInnerHTML={{ __html: article.content.trim() }}
-></div>
-) : (
-  <CCardText className="mt-3">{article.summary}</CCardText>
-)}
-
-
-                <div className="text-center mt-3">
-                  <CButton
-                    color="secondary"
-                    variant="outline"
-                    onClick={() => toggleExpand(article.id)}
-                  >
-                    {expandedArticleId === article.id ? 'Show Less' : 'Read More'}
-                  </CButton>
-                </div>
-              </CCardBody>
-            </CCard>
-          </CCol>
-        ))}
-      </CRow>
-    </div>
-  )
-}
-
-export default News
+        `}],T=()=>{const[a,s]=l.useState(null),i=e=>{s(a===e?null:e)},o=[...w].sort((e,r)=>new Date(r.publishedAt)-new Date(e.publishedAt));return t.jsxs("div",{className:"p-4",children:[t.jsx("h2",{className:"text-center mb-4 fw-bold",children:"Tournament du Sol News"}),t.jsx(h,{className:"justify-content-center",children:o.map(e=>t.jsx(d,{md:8,className:"mb-4",children:t.jsxs(m,{className:"shadow-sm border-0",children:[t.jsx(u,{orientation:"top",src:e.imageUrl,style:{objectFit:"cover",height:"280px"}}),t.jsxs(p,{children:[t.jsx(c,{className:"fw-bold fs-4 mb-2",children:e.title}),t.jsxs("p",{className:"text-muted mb-1",children:["By ",e.author," •"," ",new Date(e.publishedAt).toLocaleDateString()]}),a===e.id?t.jsx("div",{className:"mt-3",style:{lineHeight:"1.6",fontSize:"1rem"},dangerouslySetInnerHTML:{__html:e.content.trim()}}):t.jsx(g,{className:"mt-3",children:e.summary}),t.jsx("div",{className:"text-center mt-3",children:t.jsx(f,{color:"secondary",variant:"outline",onClick:()=>i(e.id),children:a===e.id?"Show Less":"Read More"})})]})]})},e.id))})]})};export{T as default};
