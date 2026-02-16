@@ -29,6 +29,9 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
     const [holesRemainingInput, setHolesRemainingInput] = useState('');
     const [saving, setSaving] = useState(false);
 
+    // Dynamic base path for GitHub Pages
+    const publicUrl = import.meta.env.BASE_URL;
+
     // Determine if it's a valid match type
     const isTeamMatch = match?.teams?.length === 2;
     const isSinglesMatch =
@@ -94,7 +97,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                     {match.teams[0].players.map((player) => (
                                         <div key={player.playerId} className="text-center">
                                             <CCardImage
-                                                src={`/avatars/${player.playerId}.jpg`}
+                                                src={`${publicUrl}avatars/${player.playerId}.jpg`}
                                                 style={{
                                                     objectFit: 'cover',
                                                     borderRadius: '50%',
@@ -133,7 +136,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
 
                                 <div className="d-flex justify-content-center mb-2">
                                     <CCardImage
-                                        src={`/avatars/${player.playerId}.jpg`}
+                                        src={`${publicUrl}avatars/${match.players[0].playerId}.jpg`}
                                         style={{
                                             objectFit: 'cover',
                                             borderRadius: '50%',
@@ -173,7 +176,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                     {match.teams[1].players.map((player) => (
                                         <div key={player.playerId} className="text-center">
                                             <CCardImage
-                                                src={`/avatars/${player.playerId}.jpg`}
+                                                src={`${publicUrl}avatars/${player.playerId}.jpg`}
                                                 style={{
                                                     objectFit: 'cover',
                                                     borderRadius: '50%',
@@ -212,7 +215,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
 
                                 <div className="d-flex justify-content-center mb-2">
                                     <CCardImage
-                                        src={`/avatars/${player.playerId}.jpg`}
+                                        src={`${publicUrl}avatars/${match.players[1].playerId}.jpg`}
                                         style={{
                                             objectFit: 'cover',
                                             borderRadius: '50%',
@@ -400,7 +403,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                 >
                                     {/* Avatar */}
                                     <CCardImage
-                                        src={`/avatars/${player.playerId}.jpg`}
+                                        src={`${publicUrl}avatars/${s.player.playerId}.jpg`}
                                         style={{
                                             width: 50,
                                             height: 50,
