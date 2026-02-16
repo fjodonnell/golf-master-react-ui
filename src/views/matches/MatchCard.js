@@ -94,7 +94,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                     {match.teams[0].players.map((player) => (
                                         <div key={player.playerId} className="text-center">
                                             <CCardImage
-                                                src={`src/assets/images/avatars/${player.playerId}.jpg`}
+                                                src={`/avatars/${player.playerId}.jpg`}
                                                 style={{
                                                     objectFit: 'cover',
                                                     borderRadius: '50%',
@@ -133,7 +133,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
 
                                 <div className="d-flex justify-content-center mb-2">
                                     <CCardImage
-                                        src={`src/assets/images/avatars/${match.players[0].playerId}.jpg`}
+                                        src={`/avatars/${player.playerId}.jpg`}
                                         style={{
                                             objectFit: 'cover',
                                             borderRadius: '50%',
@@ -173,7 +173,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                     {match.teams[1].players.map((player) => (
                                         <div key={player.playerId} className="text-center">
                                             <CCardImage
-                                                src={`src/assets/images/avatars/${player.playerId}.jpg`}
+                                                src={`/avatars/${player.playerId}.jpg`}
                                                 style={{
                                                     objectFit: 'cover',
                                                     borderRadius: '50%',
@@ -212,7 +212,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
 
                                 <div className="d-flex justify-content-center mb-2">
                                     <CCardImage
-                                        src={`src/assets/images/avatars/${match.players[1].playerId}.jpg`}
+                                        src={`/avatars/${player.playerId}.jpg`}
                                         style={{
                                             objectFit: 'cover',
                                             borderRadius: '50%',
@@ -400,7 +400,7 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                 >
                                     {/* Avatar */}
                                     <CCardImage
-                                        src={`src/assets/images/avatars/${s.player.playerId}.jpg`}
+                                        src={`/avatars/${player.playerId}.jpg`}
                                         style={{
                                             width: 50,
                                             height: 50,
