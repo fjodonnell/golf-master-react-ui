@@ -333,25 +333,35 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                             onClick={async () => {
                                 setSaving(true);
                             
-                                // 1. Map the winners/losers exactly as before
-                                const teamWinner = isTeamMatch ? match.teams.find(t => t.teamName === winnerId) || null : null;
-                                const teamLoser = isTeamMatch ? match.teams.find(t => t.teamName !== winnerId) || null : null;
-                                const playerWinner = isSinglesMatch ? match.players.find(p => p.playerId === winnerId) || null : null;
-                                const playerLoser = isSinglesMatch ? match.players.find(p => p.playerId !== winnerId) || null : null;
+                                // 1. Identify winners/losers
+                                const teamWinner = isTeamMatch ? match.teams.find(t => t.teamName === winnerId) : null;
+                                const teamLoser = isTeamMatch ? match.teams.find(t => t.teamName !== winnerId) : null;
+                                const playerWinner = isSinglesMatch ? match.players.find(p => p.playerId === winnerId) : null;
+                                const playerLoser = isSinglesMatch ? match.players.find(p => p.playerId !== winnerId) : null;
                             
-                                // 2. Build the payload with the CRITICAL round ID
+                                // 2. Build the payload to match the Java Annotations
                                 const updated = {
-                                    ...match, // Keep the existing structure
+                                    matchId: match.matchId,
+                                    matchName: match.matchName,
+                                    matchNumber: match.matchNumber, // Kept as requested
                                     holesWonBy: Number(holesWon),
                                     holesRemaining: Number(holesRemainingInput),
-                                    // Overwrite the round with just the ID to prevent circular nesting
-                                    round: {
-                                        roundId: match.round.roundId
-                                    },
-                                    teamWinner,
-                                    teamLoser,
-                                    playerWinner,
-                                    playerLoser
+                                    
+                                    // Match the @ManyToOne Round (Slim version)
+                                    round: { roundId: match.round.roundId },
+                            
+                                    // Match @JsonIncludeProperties("playerId") 
+                                    // We send only the IDs to avoid the "valueDes" null error
+                                    players: match.players?.map(p => ({ playerId: p.playerId })) || [],
+                                    
+                                    // Match @JsonIgnoreProperties({"matches"}) for Teams
+                                    teams: match.teams?.map(t => ({ teamName: t.teamName })) || [],
+                            
+                                    // Winners/Losers (matching the same slim ID-only format)
+                                    teamWinner: teamWinner ? { teamName: teamWinner.teamName } : null,
+                                    teamLoser: teamLoser ? { teamName: teamLoser.teamName } : null,
+                                    playerWinner: playerWinner ? { playerId: playerWinner.playerId } : null,
+                                    playerLoser: playerLoser ? { playerId: playerLoser.playerId } : null
                                 };
                             
                                 try {
@@ -364,13 +374,13 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                     if (!response.ok) {
                                         const errorText = await response.text();
                                         console.error('Server Error:', errorText);
-                                        alert(`Error: ${response.status}`);
+                                        alert(`Save failed: ${response.status}`);
                                     } else {
                                         if (typeof refreshMatches === 'function') await refreshMatches();
                                         setShowUpdateForm(false);
                                     }
                                 } catch (err) {
-                                    console.error('Fetch Error:', err);
+                                    console.error('Network Error:', err);
                                 } finally {
                                     setSaving(false);
                                 }
