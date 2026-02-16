@@ -33,18 +33,28 @@ export const MatchResultsTable = ({ eventName }) => {
     fetchMatches();
   }, [eventName]);
 
-  // Helper: get winner name
+  // Helper: get winner name based on which winner object exists
   const getWinnerName = (match) => {
-    return match.matchNumber <= 5
-      ? match.teamWinner?.teamName || ''
-      : match.playerWinner?.playerName || '';
+    if (match.teamWinner) {
+      return match.teamWinner.teamName;
+    }
+    if (match.playerWinner) {
+      // Note: your Match.java used 'playerId' for individual players
+      // Ensure your backend provides playerName or use playerId as a fallback
+      return match.playerWinner.playerName || match.playerWinner.playerId || '';
+    }
+    return '';
   };
 
   // Helper: get loser name
   const getLoserName = (match) => {
-    return match.matchNumber <= 5
-      ? match.teamLoser?.teamName || ''
-      : match.playerLoser?.playerName || '';
+    if (match.teamLoser) {
+      return match.teamLoser.teamName;
+    }
+    if (match.playerLoser) {
+      return match.playerLoser.playerName || match.playerLoser.playerId || '';
+    }
+    return '';
   };
 
   // Helper: get team color class
