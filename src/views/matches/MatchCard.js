@@ -332,47 +332,51 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                             color="success"
                             onClick={async () => {
                                 setSaving(true);
-
+                            
+                                // 1. Identify the winners/losers from the existing match data
+                                const teamWinner = isTeamMatch ? match.teams.find(t => t.teamName === winnerId) || null : null;
+                                const teamLoser = isTeamMatch ? match.teams.find(t => t.teamName !== winnerId) || null : null;
+                                const playerWinner = isSinglesMatch ? match.players.find(p => p.playerId === winnerId) || null : null;
+                                const playerLoser = isSinglesMatch ? match.players.find(p => p.playerId !== winnerId) || null : null;
+                            
+                                // 2. Build a "Flat" payload. 
+                                // We send the matchId so the backend knows which record to update.
                                 const updated = {
-                                    ...match,
+                                    matchId: match.matchId,
+                                    matchName: match.matchName, // Included in case backend requires it
                                     holesWonBy: Number(holesWon),
                                     holesRemaining: Number(holesRemainingInput),
-                                    teamWinner: null,
-                                    teamLoser: null,
-                                    playerWinner: null,
-                                    playerLoser: null,
+                                    teamWinner: teamWinner,
+                                    teamLoser: teamLoser,
+                                    playerWinner: playerWinner,
+                                    playerLoser: playerLoser
+                                    // Note: We are EXCLUDING 'round', 'teams', 'players', and 'scores' 
+                                    // to prevent circular reference loops.
                                 };
-
-                                // TEAM MATCH LOGIC
-                                if (isTeamMatch) {
-                                    const winner = match.teams.find(t => t.teamName === winnerId) || null;
-                                    const loser = match.teams.find(t => t.teamName !== winnerId) || null;
-
-                                    updated.teamWinner = winner;
-                                    updated.teamLoser = loser;
+                            
+                                try {
+                                    const response = await fetch(`https://golf-master-backend.onrender.com/match/${match.matchId}`, {
+                                        method: 'PUT',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify(updated),
+                                    });
+                            
+                                    if (!response.ok) {
+                                        // This will help us see the REAL backend error if it still fails
+                                        const errorText = await response.text();
+                                        console.error('Server Error Response:', errorText);
+                                        alert(`Save failed: ${response.status}`);
+                                    } else {
+                                        if (typeof refreshMatches === 'function') {
+                                            await refreshMatches();
+                                        }
+                                        setShowUpdateForm(false);
+                                    }
+                                } catch (err) {
+                                    console.error('Network/Fetch Error:', err);
+                                } finally {
+                                    setSaving(false);
                                 }
-
-                                // SINGLES MATCH LOGIC
-                                if (isSinglesMatch) {
-                                    const winner = match.players.find(p => p.playerId === winnerId) || null;
-                                    const loser = match.players.find(p => p.playerId !== winnerId) || null;
-
-                                    updated.playerWinner = winner;
-                                    updated.playerLoser = loser;
-                                }
-
-                                await fetch(`https://golf-master-backend.onrender.com/match/${match.matchId}`, {
-                                    method: 'PUT',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(updated),
-                                });
-
-                                if (typeof refreshMatches === 'function') {
-                                    await refreshMatches();
-                                }
-
-                                setSaving(false);
-                                setShowUpdateForm(false);
                             }}
 
                             disabled={saving}
