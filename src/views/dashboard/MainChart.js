@@ -9,6 +9,15 @@ const MainChart = ({ metric }) => {
     datasets: [],
   })
 
+  // Detect mobile for dynamic styling
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const yAxisLimits = {
     scores: { min: 70, max: 86 },
     pars: { min: 0, max: 16 },
@@ -58,7 +67,7 @@ const MainChart = ({ metric }) => {
           backgroundColor: `rgba(${getStyle(`--cui-${player.color}-rgb`)}, .1)`,
           borderColor: getStyle(`--cui-${player.color}`),
           pointHoverBackgroundColor: getStyle(`--cui-${player.color}`),
-          borderWidth: 2,
+          borderWidth: isMobile ? 2 : 3, // Slightly thinner lines on mobile
           data: groupedPlayers[player.id].map((entry) => entry.value),
         }))
 
@@ -72,18 +81,21 @@ const MainChart = ({ metric }) => {
     }
 
     fetchScores()
-  }, [metric])
+  }, [metric, isMobile])
 
   useEffect(() => {
     const updateColors = () => {
       if (chartRef.current) {
         const { options } = chartRef.current
-        options.scales.x.grid.borderColor = getStyle('--cui-border-color-translucent')
-        options.scales.x.grid.color = getStyle('--cui-border-color-translucent')
-        options.scales.x.ticks.color = getStyle('--cui-body-color')
-        options.scales.y.grid.borderColor = getStyle('--cui-border-color-translucent')
-        options.scales.y.grid.color = getStyle('--cui-border-color-translucent')
-        options.scales.y.ticks.color = getStyle('--cui-body-color')
+        const borderColor = getStyle('--cui-border-color-translucent')
+        const bodyColor = getStyle('--cui-body-color')
+
+        options.scales.x.grid.borderColor = borderColor
+        options.scales.x.grid.color = borderColor
+        options.scales.x.ticks.color = bodyColor
+        options.scales.y.grid.borderColor = borderColor
+        options.scales.y.grid.color = borderColor
+        options.scales.y.ticks.color = bodyColor
         chartRef.current.update()
       }
     }
@@ -99,7 +111,7 @@ const MainChart = ({ metric }) => {
   return (
     <CChartLine
       ref={chartRef}
-      style={{ height: '400px', marginTop: '40px' }}
+      style={{ height: isMobile ? '300px' : '400px', marginTop: isMobile ? '20px' : '40px' }}
       data={chartData}
       options={{
         maintainAspectRatio: false,
@@ -108,20 +120,31 @@ const MainChart = ({ metric }) => {
             display: true,
             position: 'bottom',
             labels: {
-              color: '#ffffff', // white text
+              color: getStyle('--cui-body-color'),
               font: {
-                size: 14, // bigger font
+                size: isMobile ? 11 : 14,
               },
-              usePointStyle: true, // use line or circle instead of box
-              pointStyle: 'line',  // set to 'line' for a line legend
-              padding: 25,
+              usePointStyle: true,
+              pointStyle: 'circle',
+              padding: isMobile ? 15 : 25,
             },
+          },
+          tooltip: {
+            enabled: true,
+            padding: 10,
+            cornerRadius: 4,
           }
         },
         scales: {
           x: {
-            grid: { color: getStyle('--cui-border-color-translucent'), drawOnChartArea: false },
-            ticks: { color: getStyle('--cui-body-color') },
+            grid: { 
+              color: getStyle('--cui-border-color-translucent'), 
+              drawOnChartArea: false 
+            },
+            ticks: { 
+              color: getStyle('--cui-body-color'),
+              font: { size: isMobile ? 10 : 12 }
+            },
           },
           y: {
             min: yLimits.min,
@@ -131,19 +154,16 @@ const MainChart = ({ metric }) => {
             },
             ticks: {
               color: getStyle('--cui-body-color'),
+              font: { size: isMobile ? 10 : 12 },
               stepSize:
                 metric === 'pars'
                   ? 4
                   : metric === 'birdies'
                     ? 2
-                    : undefined, // fallback for scores
+                    : undefined,
               callback: function (value) {
-                if (metric === 'pars') {
-                  return [4, 8, 12, 16].includes(value) ? value : ''
-                }
-                if (metric === 'birdies') {
-                  return [2, 4, 6, 8].includes(value) ? value : ''
-                }
+                if (metric === 'pars') return [4, 8, 12, 16].includes(value) ? value : ''
+                if (metric === 'birdies') return [2, 4, 6, 8].includes(value) ? value : ''
                 return value
               },
             },
@@ -151,7 +171,12 @@ const MainChart = ({ metric }) => {
         },
         elements: {
           line: { tension: 0.4 },
-          point: { radius: 2, hitRadius: 6, hoverRadius: 4, hoverBorderWidth: 2 },
+          point: { 
+            radius: isMobile ? 3 : 2, 
+            hitRadius: 20, // Huge hit radius for thumb-tapping accuracy
+            hoverRadius: 6, 
+            hoverBorderWidth: 2 
+          },
         },
       }}
     />

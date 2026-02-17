@@ -18,7 +18,7 @@ import {
     CTableBody,
     CTableDataCell,
 } from '@coreui/react'
-import { cilArrowTop, cilArrowBottom } from '@coreui/icons'
+import { cilArrowTop, cilArrowBottom, cilArrowRight } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import PostScoreForm from './PostScoreForm'
 
@@ -183,7 +183,7 @@ const Scoring = () => {
     }
 
     const formatScoreToPar = (value) =>
-        value == null ? '-' : value === 0 ? 'E' : value > 0 ? `+${value}` : value;            
+        value == null ? '-' : value === 0 ? 'E' : value > 0 ? `+${value}` : value;
 
     return (
         <>
@@ -293,65 +293,85 @@ const Scoring = () => {
                                     {selectedPlayer.playerNickname}’s Tournament Statistics
                                 </h5>
 
-                                <CTable striped hover responsive align="middle">
-                                    <CTableHead color="dark">
-                                        <CTableRow>
-                                            <CTableHeaderCell onClick={() => handleSort('round.event.eventName')}>
-                                                Event {renderSortIcon('round.event.eventName')}
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell onClick={() => handleSort('round.roundName')}>
-                                                Round {renderSortIcon('round.roundName')}
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell onClick={() => handleSort('round.course.courseName')}>
-                                                Course {renderSortIcon('round.course.courseName')}
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell className="text-end" onClick={() => handleSort('score')}>
-                                                Score {renderSortIcon('score')}
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell className="text-end" onClick={() => handleSort('scoreToPar')}>
-                                                To Par {renderSortIcon('scoreToPar')}
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell className="text-end" onClick={() => handleSort('pars')}>
-                                                Pars {renderSortIcon('pars')}
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell className="text-end" onClick={() => handleSort('birdies')}>
-                                                Birdies {renderSortIcon('birdies')}
-                                            </CTableHeaderCell>
-                                            <CTableHeaderCell className="text-end" onClick={() => handleSort('pointsEarned')}>
-                                                Points {renderSortIcon('pointsEarned')}
-                                            </CTableHeaderCell>
-                                        </CTableRow>
-                                    </CTableHead>
+                                <div className="table-responsive-container" style={{ position: 'relative' }}>
+                                    {/* Swipe Hint */}
+                                    {!loadingScores && selectedPlayer && sortedScores.length > 0 && (
+                                        <div className="d-md-none text-muted mb-2 d-flex align-items-center" style={{ fontSize: '0.8rem' }}>
+                                            <CIcon icon={cilArrowRight} size="sm" className="me-1" />
+                                            <span>Swipe to view full stats</span>
+                                        </div>
+                                    )}
 
-                                    <CTableBody>
-                                        {sortedScores.map((score, idx) => (
-                                            <CTableRow key={idx}>
-                                                <CTableDataCell>{score.round?.event?.eventName || 'Unknown'}</CTableDataCell>
-                                                <CTableDataCell>{score.round?.roundName || 'N/A'}</CTableDataCell>
-                                                <CTableDataCell>{score.round?.course?.courseName || 'N/A'}</CTableDataCell>
-                                                <CTableDataCell className="text-end">{score.score ?? '-'}</CTableDataCell>
-                                                <CTableDataCell className="text-end">{formatScoreToPar(score.scoreToPar)}</CTableDataCell>
-                                                <CTableDataCell className="text-end">{score.pars ?? '-'}</CTableDataCell>
-                                                <CTableDataCell className="text-end">{score.birdies ?? '-'}</CTableDataCell>
-                                                <CTableDataCell className="text-end fw-semibold">{score.pointsEarned ?? '-'}</CTableDataCell>
-                                            </CTableRow>
-                                        ))}
+                                    <CTable striped hover responsive align="middle" className="mt-3">
+                                        <CTableHead color="dark">
+                                            <CTableRow className="text-nowrap">
+                                                <CTableHeaderCell className="d-none d-sm-table-cell" onClick={() => handleSort('round.event.eventName')}>
+                                                    Event {renderSortIcon('round.event.eventName')}
+                                                </CTableHeaderCell>
 
-                                        {/* ✅ Averages row */}
-                                        {averages && (
-                                            <CTableRow>
-                                                <CTableDataCell colSpan={3} className="text-end fw-bold">
-                                                    Averages:
-                                                </CTableDataCell>
-                                                <CTableDataCell className="text-end fw-bold">{averages.score}</CTableDataCell>
-                                                <CTableDataCell className="text-end fw-bold">{formatScoreToPar(averages.scoreToPar)}</CTableDataCell>
-                                                <CTableDataCell className="text-end fw-bold">{averages.pars}</CTableDataCell>
-                                                <CTableDataCell className="text-end fw-bold">{averages.birdies}</CTableDataCell>
-                                                <CTableDataCell className="text-end fw-bold">{averages.pointsEarned}</CTableDataCell>
+                                                <CTableHeaderCell className="sticky-column" onClick={() => handleSort('round.roundName')}>
+                                                    Round {renderSortIcon('round.roundName')}
+                                                </CTableHeaderCell>
+
+                                                <CTableHeaderCell onClick={() => handleSort('round.course.courseName')}>
+                                                    Course {renderSortIcon('round.course.courseName')}
+                                                </CTableHeaderCell>
+
+                                                {/* Abbreviated Mobile Headers */}
+                                                <CTableHeaderCell className="text-end" onClick={() => handleSort('score')}>
+                                                    <span className="d-md-none">SCR</span><span className="d-none d-md-inline">Score</span>
+                                                </CTableHeaderCell>
+                                                <CTableHeaderCell className="text-end" onClick={() => handleSort('scoreToPar')}>
+                                                    <span className="d-md-none">+/-</span><span className="d-none d-md-inline">To Par</span>
+                                                </CTableHeaderCell>
+                                                <CTableHeaderCell className="text-end" onClick={() => handleSort('pars')}>
+                                                    <span className="d-md-none">P</span><span className="d-none d-md-inline">Pars</span>
+                                                </CTableHeaderCell>
+                                                <CTableHeaderCell className="text-end" onClick={() => handleSort('birdies')}>
+                                                    <span className="d-md-none">B</span><span className="d-none d-md-inline">Birdies</span>
+                                                </CTableHeaderCell>
+                                                <CTableHeaderCell className="text-end" onClick={() => handleSort('pointsEarned')}>
+                                                    <span className="d-md-none">PTS</span><span className="d-none d-md-inline">Points</span>
+                                                </CTableHeaderCell>
                                             </CTableRow>
-                                        )}
-                                    </CTableBody>
-                                </CTable>
+                                        </CTableHead>
+
+                                        <CTableBody>
+                                            {sortedScores.map((score, idx) => (
+                                                <CTableRow key={idx} className="text-nowrap">
+                                                    <CTableDataCell className="d-none d-sm-table-cell">
+                                                        {score.round?.event?.eventName || 'Unknown'}
+                                                    </CTableDataCell>
+                                                    <CTableDataCell className="sticky-column fw-bold">
+                                                        {score.round?.roundName || 'N/A'}
+                                                    </CTableDataCell>
+                                                    <CTableDataCell>{score.round?.course?.courseName || 'N/A'}</CTableDataCell>
+                                                    <CTableDataCell className="text-end">{score.score ?? '-'}</CTableDataCell>
+                                                    <CTableDataCell className="text-end">{formatScoreToPar(score.scoreToPar)}</CTableDataCell>
+                                                    <CTableDataCell className="text-end">{score.pars ?? '-'}</CTableDataCell>
+                                                    <CTableDataCell className="text-end">{score.birdies ?? '-'}</CTableDataCell>
+                                                    <CTableDataCell className="text-end fw-semibold">{score.pointsEarned ?? '-'}</CTableDataCell>
+                                                </CTableRow>
+                                            ))}
+
+                                            {/* ✅ Soft White Averages Row */}
+                                            {averages && (
+                                                <CTableRow style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}>
+                                                    <CTableDataCell className="d-none d-sm-table-cell"></CTableDataCell>
+                                                    <CTableDataCell className="sticky-column fw-bold text-body-secondary">
+                                                        Avg:
+                                                    </CTableDataCell>
+                                                    <CTableDataCell></CTableDataCell>
+                                                    <CTableDataCell className="text-end fw-bold text-body-secondary">{averages.score}</CTableDataCell>
+                                                    <CTableDataCell className="text-end fw-bold text-body-secondary">{formatScoreToPar(averages.scoreToPar)}</CTableDataCell>
+                                                    <CTableDataCell className="text-end fw-bold text-body-secondary">{averages.pars}</CTableDataCell>
+                                                    <CTableDataCell className="text-end fw-bold text-body-secondary">{averages.birdies}</CTableDataCell>
+                                                    <CTableDataCell className="text-end fw-bold text-body-secondary">{averages.pointsEarned}</CTableDataCell>
+                                                </CTableRow>
+                                            )}
+                                        </CTableBody>
+                                    </CTable>
+                                </div>
                             </>
                         )}
 

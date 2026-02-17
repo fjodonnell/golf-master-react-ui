@@ -6,6 +6,7 @@ import {
   CCard,
   CCardBody,
   CCol,
+  CFormSelect,
   CRow,
   CTable,
   CTableBody,
@@ -100,7 +101,7 @@ const Dashboard = () => {
   }, [])
 
   const formatScoreToPar = (value) =>
-    value == null ? '-' : value === 0 ? 'E' : value > 0 ? `+${value}` : value;  
+    value == null ? '-' : value === 0 ? 'E' : value > 0 ? `+${value}` : value;
 
   return (
     <>
@@ -112,11 +113,15 @@ const Dashboard = () => {
                 <CIcon icon={cilPeople} />
               </CTableHeaderCell>
               <CTableHeaderCell className="bg-body-tertiary">Player</CTableHeaderCell>
-              <CTableHeaderCell className="bg-body-tertiary text-center">
+
+              {/* 1. Hide Country on small screens (d-none) and show at Large (d-lg-table-cell) */}
+              <CTableHeaderCell className="bg-body-tertiary text-center d-none d-lg-table-cell">
                 Country
               </CTableHeaderCell>
-              <CTableHeaderCell className="bg-body-tertiary text-center">Total Points</CTableHeaderCell>
-              <CTableHeaderCell className="bg-body-tertiary text-center">Strokes to Par</CTableHeaderCell>
+
+              {/* 2. Use shorter header names or abbreviations for mobile if needed */}
+              <CTableHeaderCell className="bg-body-tertiary text-center">Points</CTableHeaderCell>
+              <CTableHeaderCell className="bg-body-tertiary text-center">+/- Par</CTableHeaderCell>
             </CTableRow>
           </CTableHead>
           <CTableBody>
@@ -126,17 +131,18 @@ const Dashboard = () => {
                   <CAvatar size="md" src={item.avatar.src} />
                 </CTableDataCell>
                 <CTableDataCell>
-                  <div>{item.user.name}</div>
-                  <div className="small text-body-secondary text-nowrap">
-                    <span>
-                      {item.user.city}, {item.user.state}
-                    </span>
+                  <div className="fw-semibold">{item.user.name}</div>
+                  <div className="small text-body-secondary">
+                    {item.user.city}, {item.user.state}
                   </div>
                 </CTableDataCell>
-                <CTableDataCell className="text-center">
+
+                {/* Match the d-none logic for the Country data cell */}
+                <CTableDataCell className="text-center d-none d-lg-table-cell">
                   <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
                 </CTableDataCell>
-                <CTableDataCell className="text-center">
+
+                <CTableDataCell className="text-center fw-bold">
                   {item.totalPoints}
                 </CTableDataCell>
                 <CTableDataCell className="text-center">
@@ -157,13 +163,13 @@ const Dashboard = () => {
               </h4>
               <div className="small text-body-secondary">Tournament du Sol 2025</div>
             </CCol>
-            <CCol sm={7} className="d-none d-md-block">
-              <CButtonGroup className="float-end me-3">
+            <CCol sm={7}>
+              {/* DESKTOP: Button Group (Hidden on XS/SM screens) */}
+              <CButtonGroup className="float-end me-3 d-none d-md-inline-flex">
                 {['Scores', 'Pars', 'Birdies'].map((value) => (
                   <CButton
                     color="outline-secondary"
                     key={value}
-                    className="mx-0"
                     active={chartType === value}
                     onClick={() => setChartType(value)}
                   >
@@ -171,6 +177,19 @@ const Dashboard = () => {
                   </CButton>
                 ))}
               </CButtonGroup>
+
+              {/* MOBILE: Select Dropdown (Visible only on XS/SM screens) */}
+              <div className="d-md-none mt-2">
+                <CFormSelect
+                  value={chartType}
+                  onChange={(e) => setChartType(e.target.value)}
+                  className="border-secondary"
+                >
+                  <option value="Scores">Scores</option>
+                  <option value="Pars">Pars</option>
+                  <option value="Birdies">Birdies</option>
+                </CFormSelect>
+              </div>
             </CCol>
           </CRow>
           {/* ✅ Fix: pass metric prop correctly */}

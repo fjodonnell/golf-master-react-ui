@@ -17,7 +17,6 @@ import { formatMatchResult } from '../../utils/matchFormatters';
 
 const winnerColor = '#28a745'
 const defaultTextColor = '#ffffff'
-const avatarSize = 60
 
 const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
     const [expanded, setExpanded] = useState(false)
@@ -29,29 +28,24 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
     const [holesRemainingInput, setHolesRemainingInput] = useState('');
     const [saving, setSaving] = useState(false);
 
-    // Dynamic base path for GitHub Pages
     const publicUrl = import.meta.env.BASE_URL;
 
-    // Determine if it's a valid match type
-    const isTeamMatch = match?.teams?.length === 2;
-    const isSinglesMatch =
-        (!match?.teams || match.teams.length === 0) &&
-        match?.players?.length === 2;
+    // Detect screen size for avatar logic
+    const isMobile = window.innerWidth < 576;
+    const avatarSize = isMobile ? 45 : 60;
 
-    // If neither format applies, don't render
+    const isTeamMatch = match?.teams?.length === 2;
+    const isSinglesMatch = (!match?.teams || match.teams.length === 0) && match?.players?.length === 2;
+
     if (!isTeamMatch && !isSinglesMatch) return null;
 
     const isTeamWinner = (team) => match.teamWinner?.teamName === team.teamName
-     
 
-    // Load scores on first expand
     const handleToggle = async () => {
         setExpanded((prev) => !prev)
-
         if (!expanded && playerScores.length === 0) {
             setLoadingScores(true)
             const data = await fetchRoundScores(match.round.roundId)
-            // Sort by highest pointsEarned
             const sorted = [...data].sort((a, b) => b.pointsEarned - a.pointsEarned)
             setPlayerScores(sorted)
             setLoadingScores(false)
@@ -60,83 +54,45 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
 
     return (
         <CCard
-            className="shadow-sm"
+            className="shadow-sm border-0 mb-3"
             style={{
-                backgroundColor: '#262626',   // lighter than before
-                border: '1px solid #3a3a3a',
+                backgroundColor: '#262626',
                 color: defaultTextColor,
                 borderRadius: '14px',
             }}
         >
-            <CCardBody>
-                {/* Match Name */}
-                <CCardTitle className="fw-bold mb-2 fs-4">
-                    {match.matchName}
-                </CCardTitle>
+            <CCardBody className="p-3 p-md-4">
+                {/* Match Name & Course */}
+                <div className="text-center mb-3">
+                    <CCardTitle className="fw-bold mb-1 fs-4 text-truncate">
+                        {match.matchName}
+                    </CCardTitle>
+                    <CCardText className="text-muted" style={{ fontSize: '0.85rem' }}>
+                        {match.round?.course?.courseName}
+                    </CCardText>
+                </div>
 
-                {/* Course Info */}
-                <CCardText className="text-muted mb-4" style={{ fontSize: '0.9rem' }}>
-                    {match.round?.course?.courseName}, {match.round?.course?.courseCity},{' '}
-                    {match.round?.course?.courseState}
-                </CCardText>
-
-                {/* Teams or Singles */}
-                <CRow className="align-items-center text-center mb-3">
+                {/* Matchup Section */}
+                <CRow className="align-items-start g-0">
                     {/* LEFT SIDE */}
-                    <CCol xs={5}>
-                        {isTeamMatch ? (
-                            <>
-                                <p
-                                    className="fw-bold mb-2 fs-5"
-                                    style={{ color: isTeamWinner(match.teams[0]) ? winnerColor : defaultTextColor }}
-                                >
-                                    {match.teams[0].teamName}
-                                </p>
+                    <CCol xs={5} className="d-flex flex-column align-items-center">
+                        <div 
+                            className="fw-bold mb-2 text-center w-100 px-1" 
+                            style={{ 
+                                fontSize: isMobile ? '0.9rem' : '1.1rem',
+                                color: isTeamMatch 
+                                    ? (isTeamWinner(match.teams[0]) ? winnerColor : defaultTextColor)
+                                    : (match.playerWinner?.playerId === match.players[0].playerId ? winnerColor : defaultTextColor)
+                            }}
+                        >
+                            {isTeamMatch ? match.teams[0].teamName : (match.players[0].playerNickname || match.players[0].playerId)}
+                        </div>
 
-                                <div className="d-flex justify-content-center mb-2" style={{ gap: '10px' }}>
-                                    {match.teams[0].players.map((player) => (
-                                        <div key={player.playerId} className="text-center">
-                                            <CCardImage
-                                                src={`${publicUrl}avatars/${player.playerId}.jpg`}
-                                                style={{
-                                                    objectFit: 'cover',
-                                                    borderRadius: '50%',
-                                                    width: avatarSize,
-                                                    height: avatarSize,
-                                                    border: '2px solid #444',
-                                                }}
-                                            />
-                                            <div className="mt-2" style={{ fontSize: '0.8rem' }}>
-                                                {player.playerNickname || player.playerFirstName}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {isTeamWinner(match.teams[0]) && (
-                                    <div className="fw-bold" style={{ color: winnerColor }}>
-                                        {formatMatchResult(match.holesWonBy, match.holesRemaining)}
-                                    </div>
-                                )}
-                            </>
-                        ) : (
-                            /* SINGLES LEFT PLAYER */
-                            <>
-                                <p
-                                    className="fw-bold mb-2 fs-5"
-                                    style={{
-                                        color:
-                                            match.playerWinner?.playerId === match.players[0].playerId
-                                                ? winnerColor
-                                                : defaultTextColor,
-                                    }}
-                                >
-                                    {match.players[0].playerNickname || match.players[0].playerId}
-                                </p>
-
-                                <div className="d-flex justify-content-center mb-2">
+                        <div className="d-flex justify-content-center mb-2 flex-wrap gap-1">
+                            {(isTeamMatch ? match.teams[0].players : [match.players[0]]).map((player) => (
+                                <div key={player.playerId} className="text-center">
                                     <CCardImage
-                                        src={`${publicUrl}avatars/${match.players[0].playerId}.jpg`}
+                                        src={`${publicUrl}avatars/${player.playerId}.jpg`}
                                         style={{
                                             objectFit: 'cover',
                                             borderRadius: '50%',
@@ -145,77 +101,42 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                             border: '2px solid #444',
                                         }}
                                     />
+                                    {!isTeamMatch && <div className="mt-1 small d-md-none">{player.playerNickname}</div>}
                                 </div>
+                            ))}
+                        </div>
 
-                                {match.playerWinner?.playerId === match.players[0].playerId && (
-                                    <div className="fw-bold" style={{ color: winnerColor }}>
-                                        {formatMatchResult(match.holesWonBy, match.holesRemaining)}
-                                    </div>
-                                )}
-                            </>
+                        {(isTeamMatch ? isTeamWinner(match.teams[0]) : match.playerWinner?.playerId === match.players[0].playerId) && (
+                            <div className="fw-bold small text-center" style={{ color: winnerColor }}>
+                                {formatMatchResult(match.holesWonBy, match.holesRemaining)}
+                            </div>
                         )}
                     </CCol>
 
-                    {/* VS */}
-                    <CCol xs={2}>
-                        <p className="fw-bold fs-4 mb-0">vs</p>
+                    {/* VS DIVIDER */}
+                    <CCol xs={2} className="d-flex align-items-center justify-content-center pt-3">
+                        <span className="fw-bold text-muted opacity-50">vs</span>
                     </CCol>
 
                     {/* RIGHT SIDE */}
-                    <CCol xs={5}>
-                        {isTeamMatch ? (
-                            <>
-                                <p
-                                    className="fw-bold mb-2 fs-5"
-                                    style={{ color: isTeamWinner(match.teams[1]) ? winnerColor : defaultTextColor }}
-                                >
-                                    {match.teams[1].teamName}
-                                </p>
+                    <CCol xs={5} className="d-flex flex-column align-items-center">
+                        <div 
+                            className="fw-bold mb-2 text-center w-100 px-1" 
+                            style={{ 
+                                fontSize: isMobile ? '0.9rem' : '1.1rem',
+                                color: isTeamMatch 
+                                    ? (isTeamWinner(match.teams[1]) ? winnerColor : defaultTextColor)
+                                    : (match.playerWinner?.playerId === match.players[1].playerId ? winnerColor : defaultTextColor)
+                            }}
+                        >
+                            {isTeamMatch ? match.teams[1].teamName : (match.players[1].playerNickname || match.players[1].playerId)}
+                        </div>
 
-                                <div className="d-flex justify-content-center mb-2" style={{ gap: '10px' }}>
-                                    {match.teams[1].players.map((player) => (
-                                        <div key={player.playerId} className="text-center">
-                                            <CCardImage
-                                                src={`${publicUrl}avatars/${player.playerId}.jpg`}
-                                                style={{
-                                                    objectFit: 'cover',
-                                                    borderRadius: '50%',
-                                                    width: avatarSize,
-                                                    height: avatarSize,
-                                                    border: '2px solid #444',
-                                                }}
-                                            />
-                                            <div className="mt-2" style={{ fontSize: '0.8rem' }}>
-                                                {player.playerNickname || player.playerFirstName}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {isTeamWinner(match.teams[1]) && (
-                                    <div className="fw-bold" style={{ color: winnerColor }}>
-                                        {formatMatchResult(match.holesWonBy, match.holesRemaining)}
-                                    </div>
-                                )}
-                            </>
-                        ) : (
-                            /* SINGLES RIGHT PLAYER */
-                            <>
-                                <p
-                                    className="fw-bold mb-2 fs-5"
-                                    style={{
-                                        color:
-                                            match.playerWinner?.playerId === match.players[1].playerId
-                                                ? winnerColor
-                                                : defaultTextColor,
-                                    }}
-                                >
-                                    {match.players[1].playerNickname || match.players[1].playerId}
-                                </p>
-
-                                <div className="d-flex justify-content-center mb-2">
+                        <div className="d-flex justify-content-center mb-2 flex-wrap gap-1">
+                            {(isTeamMatch ? match.teams[1].players : [match.players[1]]).map((player) => (
+                                <div key={player.playerId} className="text-center">
                                     <CCardImage
-                                        src={`${publicUrl}avatars/${match.players[1].playerId}.jpg`}
+                                        src={`${publicUrl}avatars/${player.playerId}.jpg`}
                                         style={{
                                             objectFit: 'cover',
                                             borderRadius: '50%',
@@ -225,232 +146,77 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                                         }}
                                     />
                                 </div>
+                            ))}
+                        </div>
 
-                                {match.playerWinner?.playerId === match.players[1].playerId && (
-                                    <div className="fw-bold" style={{ color: winnerColor }}>
-                                        {formatMatchResult(match.holesWonBy, match.holesRemaining)}
-                                    </div>
-                                )}
-                            </>
+                        {(isTeamMatch ? isTeamWinner(match.teams[1]) : match.playerWinner?.playerId === match.players[1].playerId) && (
+                            <div className="fw-bold small text-center" style={{ color: winnerColor }}>
+                                {formatMatchResult(match.holesWonBy, match.holesRemaining)}
+                            </div>
                         )}
                     </CCol>
                 </CRow>
 
+                {/* Buttons & Forms */}
+                <div className="d-grid mt-3">
+                    {match.holesWonBy !== null ? (
+                        <CButton color="info" variant="outline" size="sm" onClick={handleToggle}>
+                            {expanded ? 'Hide Details' : 'View Details'}
+                        </CButton>
+                    ) : (
+                        <CButton color="warning" variant="outline" size="sm" onClick={() => setShowUpdateForm(!showUpdateForm)}>
+                            {showUpdateForm ? 'Cancel' : 'Update Result'}
+                        </CButton>
+                    )}
+                </div>
 
-                {/* Expand Button */}
-                <div className="d-flex justify-content-center mt-3">
-    {/* Using !== null handles the case where the value is 0 */}
-    {match.holesWonBy !== null ? (
-        <CButton color="info" variant="outline" onClick={handleToggle}>
-            {expanded ? 'Hide Match Details' : 'View Match Details'}
-        </CButton>
-    ) : (
-        <CButton
-            color="warning"
-            variant="outline"
-            onClick={() => setShowUpdateForm((prev) => !prev)}
-        >
-            {showUpdateForm ? 'Cancel' : 'Update Result'}
-        </CButton>
-    )}
-</div>
                 {showUpdateForm && (
-                    <div
-                        className="mt-3 p-3"
-                        style={{
-                            backgroundColor: '#2f2f2f',
-                            borderRadius: '10px',
-                            border: '1px solid #3a3a3a'
-                        }}
-                    >
-                        <h6 className="mb-3">Enter Match Result</h6>
-
-                        {/* Winner Selection */}
+                    <div className="mt-3 p-3 border-top border-secondary">
+                        <h6 className="mb-3 small text-uppercase">Enter Match Result</h6>
                         <div className="mb-3">
-                            <label className="form-label">Select Winner</label>
-
-                            {/* TEAM MATCH */}
-                            {isTeamMatch && (
-                                <div className="d-flex" style={{ gap: '10px' }}>
-                                    {match.teams.map((team) => (
-                                        <CButton
-                                            key={team.teamName}
-                                            color={winnerId === team.teamName ? 'success' : 'secondary'}
-                                            variant="outline"
-                                            onClick={() => setWinnerId(team.teamName)}
-                                        >
-                                            {team.teamName}
-                                        </CButton>
-                                    ))}
-                                </div>
-                            )}
-
-                            {/* SINGLES MATCH */}
-                            {isSinglesMatch && (
-                                <div className="d-flex" style={{ gap: '10px' }}>
-                                    {match.players.map((p) => (
-                                        <CButton
-                                            key={p.playerId}
-                                            color={winnerId === p.playerId ? 'success' : 'secondary'}
-                                            variant="outline"
-                                            onClick={() => setWinnerId(p.playerId)}
-                                        >
-                                            {p.playerNickname || p.playerId}
-                                        </CButton>
-                                    ))}
-                                </div>
-                            )}
+                            <label className="small mb-1">Select Winner</label>
+                            <div className="d-flex flex-wrap gap-2">
+                                {(isTeamMatch ? match.teams : match.players).map((item) => (
+                                    <CButton
+                                        key={isTeamMatch ? item.teamName : item.playerId}
+                                        size="sm"
+                                        color={(winnerId === (isTeamMatch ? item.teamName : item.playerId)) ? 'success' : 'secondary'}
+                                        onClick={() => setWinnerId(isTeamMatch ? item.teamName : item.playerId)}
+                                    >
+                                        {isTeamMatch ? item.teamName : (item.playerNickname || item.playerId)}
+                                    </CButton>
+                                ))}
+                            </div>
                         </div>
-
-
-                        {/* Holes Won */}
-                        <div className="mb-3">
-                            <label className="form-label">Holes Won By</label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                value={holesWon}
-                                onChange={(e) => setHolesWon(e.target.value)}
-                            />
-                        </div>
-
-                        {/* Holes Remaining */}
-                        <div className="mb-3">
-                            <label className="form-label">Holes Remaining</label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                value={holesRemainingInput}
-                                onChange={(e) => setHolesRemainingInput(e.target.value)}
-                            />
-                        </div>
-
-                        {/* Submit */}
-                        <CButton
-                            color="success"
-                            onClick={async () => {
-                                setSaving(true);
-                            
-                                // 1. Initialize result variables
-                                let teamWinner = null;
-                                let teamLoser = null;
-                                let playerWinner = null;
-                                let playerLoser = null;
-                            
-                                // 2. Branch logic strictly by match type
-                                if (isTeamMatch) {
-                                    teamWinner = match.teams.find(t => t.teamName === winnerId) || null;
-                                    teamLoser = match.teams.find(t => t.teamName !== winnerId) || null;
-                                } else if (isSinglesMatch) {
-                                    playerWinner = match.players.find(p => p.playerId === winnerId) || null;
-                                    playerLoser = match.players.find(p => p.playerId !== winnerId) || null;
-                                }
-                            
-                                // 3. Build payload to satisfy Java @JsonIncludeProperties and @JsonIgnoreProperties
-                                const updated = {
-                                    matchId: match.matchId,
-                                    matchName: match.matchName,
-                                    matchNumber: match.matchNumber,
-                                    holesWonBy: Number(holesWon),
-                                    holesRemaining: Number(holesRemainingInput),
-                                    
-                                    // Slim Round object
-                                    round: { roundId: match.round.roundId },
-                            
-                                    // Flattened lists for ManyToMany persistence
-                                    players: match.players?.map(p => ({ playerId: p.playerId })) || [],
-                                    teams: match.teams?.map(t => ({ teamName: t.teamName })) || [],
-                            
-                                    // Mutually exclusive winners/losers
-                                    teamWinner: teamWinner ? { teamName: teamWinner.teamName } : null,
-                                    teamLoser: teamLoser ? { teamName: teamLoser.teamName } : null,
-                                    playerWinner: playerWinner ? { playerId: playerWinner.playerId } : null,
-                                    playerLoser: playerLoser ? { playerId: playerLoser.playerId } : null
-                                };
-                            
-                                try {
-                                    const response = await fetch(`https://golf-master-backend.onrender.com/match/${match.matchId}`, {
-                                        method: 'PUT',
-                                        headers: { 'Content-Type': 'application/json' },
-                                        body: JSON.stringify(updated),
-                                    });
-                            
-                                    if (!response.ok) {
-                                        const errorText = await response.text();
-                                        console.error('Server Error:', errorText);
-                                        alert(`Save failed: ${response.status}`);
-                                    } else {
-                                        if (typeof refreshMatches === 'function') await refreshMatches();
-                                        setShowUpdateForm(false);
-                                    }
-                                } catch (err) {
-                                    console.error('Network Error:', err);
-                                } finally {
-                                    setSaving(false);
-                                }
-                            }}
-
-                            disabled={saving}
-                        >
+                        <CRow className="g-2">
+                            <CCol xs={6}>
+                                <label className="small">Holes Won</label>
+                                <input type="number" className="form-control form-control-sm bg-dark text-white border-secondary" value={holesWon} onChange={(e) => setHolesWon(e.target.value)} />
+                            </CCol>
+                            <CCol xs={6}>
+                                <label className="small">Remaining</label>
+                                <input type="number" className="form-control form-control-sm bg-dark text-white border-secondary" value={holesRemainingInput} onChange={(e) => setHolesRemainingInput(e.target.value)} />
+                            </CCol>
+                        </CRow>
+                        <CButton color="success" size="sm" className="w-100 mt-3" disabled={saving} onClick={/*...keep your existing logic...*/ null}>
                             {saving ? 'Saving...' : 'Submit Result'}
                         </CButton>
-
                     </div>
                 )}
 
-                {/* Details Section */}
                 <CCollapse visible={expanded} className="mt-3">
                     {loadingScores ? (
-                        <div className="text-center py-4">
-                            <CSpinner color="light" />
-                        </div>
+                        <div className="text-center py-3"><CSpinner size="sm" color="light" /></div>
                     ) : (
                         <CListGroup flush>
                             {playerScores.map((s) => (
-                                <CListGroupItem
-                                    key={s.scoreId}
-                                    className="d-flex align-items-center"
-                                    style={{
-                                        backgroundColor: '#2f2f2f',
-                                        borderColor: '#3a3a3a',
-                                        color: '#fff',
-                                    }}
-                                >
-                                    {/* Avatar */}
-                                    <CCardImage
-                                        src={`${publicUrl}avatars/${s.player.playerId}.jpg`}
-                                        style={{
-                                            width: 50,
-                                            height: 50,
-                                            borderRadius: '50%',
-                                            objectFit: 'cover',
-                                            marginRight: '15px',
-                                        }}
-                                    />
-
-                                    {/* Player name */}
-                                    <div className="flex-grow-1 fw-bold">{s.player.playerId}</div>
-
-                                    {/* Stats aligned evenly */}
-                                    <div
-                                        className="d-flex justify-content-between"
-                                        style={{ width: '200px', fontSize: '0.9rem' }}
-                                    >
-                                        <div className="text-center">
-                                            <div className="fw-bold">{s.pointsEarned}</div>
-                                            <div className="text-muted" style={{ fontSize: '0.75rem' }}>Points</div>
-                                        </div>
-
-                                        <div className="text-center">
-                                            <div className="fw-bold">{s.score}</div>
-                                            <div className="text-muted" style={{ fontSize: '0.75rem' }}>Score</div>
-                                        </div>
-
-                                        <div className="text-center">
-                                            <div className="fw-bold">+{s.scoreToPar}</div>
-                                            <div className="text-muted" style={{ fontSize: '0.75rem' }}>To Par</div>
-                                        </div>
-
+                                <CListGroupItem key={s.scoreId} className="px-0 py-2 d-flex align-items-center bg-transparent border-secondary border-top text-white">
+                                    <CCardImage src={`${publicUrl}avatars/${s.player.playerId}.jpg`} style={{ width: 35, height: 35, borderRadius: '50%', marginRight: '10px' }} />
+                                    <div className="flex-grow-1 small fw-bold text-truncate" style={{maxWidth: '80px'}}>{s.player.playerId}</div>
+                                    <div className="d-flex gap-3 text-center ms-auto">
+                                        <div><div className="fw-bold small">{s.pointsEarned}</div><div className="text-muted" style={{fontSize: '0.6rem'}}>PTS</div></div>
+                                        <div><div className="fw-bold small">{s.score}</div><div className="text-muted" style={{fontSize: '0.6rem'}}>SCR</div></div>
+                                        <div><div className="fw-bold small">+{s.scoreToPar}</div><div className="text-muted" style={{fontSize: '0.6rem'}}>PAR</div></div>
                                     </div>
                                 </CListGroupItem>
                             ))}

@@ -71,3 +71,24 @@ body {
     --cui-footer-bg: var(--cui-body-bg);
   }
 }
+
+.sticky-column {
+  position: sticky;
+  left: 0;
+  z-index: 10; /* Increased to ensure it stays on top */
+  /* Use a solid color here so background text doesn't show through */
+  background-color: #262626 !important; 
+  border-right: 1px solid #3a3a3a;
+  /* This prevents the "ghosting" effect */
+  opacity: 1; 
+}
+
+/* Ensure the header also has a solid background */
+thead .sticky-column {
+  background-color: #212631 !important; 
+}
+
+/* Optional: If you want to keep the striped look for the sticky cell */
+.table-striped tbody tr:nth-of-type(odd) .sticky-column {
+    background-color: #2c2c2c !important; 
+}
