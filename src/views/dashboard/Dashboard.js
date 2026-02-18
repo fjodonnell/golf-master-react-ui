@@ -88,7 +88,7 @@ const Dashboard = () => {
     const fetchScores = async () => {
       try {
         const response = await fetch(
-          'https://golf-master-backend.onrender.com/score/eventName/Tournament%20du%20Sol%202025',
+          'https://golf-master-backend.onrender.com/score/eventName/Tournament%20du%20Sol%202026',
         )
         const data = await response.json()
         setScores(data)
@@ -161,7 +161,7 @@ const Dashboard = () => {
               <h4 id="traffic" className="card-title mb-0">
                 Player Scoring Trend
               </h4>
-              <div className="small text-body-secondary">Tournament du Sol 2025</div>
+              <div className="small text-body-secondary">Tournament du Sol 2026</div>
             </CCol>
             <CCol sm={7}>
               {/* DESKTOP: Button Group (Hidden on XS/SM screens) */}
@@ -216,7 +216,7 @@ const Dashboard = () => {
         </CCardFooter> */}
       </CCard>
       <CCard className="mb-4">
-        <MatchResultsTable eventName="Tournament du Sol 2025" />
+        <MatchResultsTable eventName="Tournament du Sol 2026" />
       </CCard>
 
     </>
