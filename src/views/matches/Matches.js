@@ -14,7 +14,7 @@ import MatchCard from './MatchCard'
 
 const Matches = () => {
   const [events, setEvents] = useState([])
-  const [selectedEvent, setSelectedEvent] = useState('Tournament du Sol 2025')
+  const [selectedEvent, setSelectedEvent] = useState('Tournament du Sol 2026')
   const [matches, setMatches] = useState([])
   const [loading, setLoading] = useState(false)
 
