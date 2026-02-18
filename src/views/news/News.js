@@ -72,7 +72,34 @@ const articles = [
       
         <p>As 2026 approaches, Carpenter isn’t talking about curses or equipment. He’s talking about preparation, patience, and getting back to the formula that made him great. A return to the TDS Final would surprise no one — and another trophy might surprise even fewer.</p>
         `
+      },
+      {
+        id: 3,
+        title: 'Ghidotti Chases Breakthrough After Back-to-Back Heartbreaks',
+        publishedAt: '2026-02-17T20:00:00',
+        imageUrl: `${publicUrl}photos/WillSwinging.jpg`,
+        summary:
+          'Electric, unpredictable, and always entertaining — Will Ghidotti returns to TDS 2026 still hunting the one prize that has eluded him.',
+        author: 'Tournament du Sol Media Team',
+        content: `
+        <p>If there is one word competitors use to describe Will Ghidotti’s golf game, it’s <em>electric</em>. At any given moment, “Wedge Willy” can reach a par five in two and drain an eagle putt that leaves the group speechless. He can just as easily launch a 330-yard drive into what some now jokingly call the Bezosphere, sending the ball ricocheting down a wealthy Palm Desert street and into a backyard pool. With Ghidotti, you truly never know what’s coming next.</p>
+      
+        <p>What is certain is that he knows how to get to the big stage. Ghidotti has reached the TDS Final in each of the past two years — a feat few can claim. Yet the trophy has remained just out of reach, leaving him as the only active player without a victory in the finals.</p>
+      
+        <p>Ironically, the history of Tournament du Sol itself is tied to Ghidotti. It was Will who coined the tournament’s name ahead of the 2022 trip, a moment that helped shape the identity of the event as it exists today.</p>
+      
+        <p>The 2024 run was filled with drama. Ghidotti ultimately fell to Alex Carpenter in the final, but the night before he delivered one of the most clutch moments in TDS lore. On the 17th green at The Lights at Indio, putting in near darkness, Ghidotti buried a 15-footer that secured a championship bid for the SAAAAAMOOOOOOKAS squad and knocked the Nomadic Golfers into the third-place match. It was vintage Willy — fearless and theatrical.</p>
+      
+        <p>Then came 2025, a year many believed would finally be his. His short game took a massive leap forward, and fellow competitors watched in disbelief as he chipped in from everywhere. “<em>I can make 5 from anywhere,</em>” Ghidotti liked to say, but his golf game was challenging this mantra. Three consecutive rounds of 76 powered him straight into another TDS Final, this time against close friend and rival Zach Huston.</p>
+      
+        <p>Through nine holes at SilverRock, Ghidotti looked poised to change his story. He built a 2 UP lead and had all the momentum. But the back nine flipped the script. Huston stormed back, taking four straight holes in a dramatic swing. Ghidotti couldn’t stop the slide and ultimately fell 3 & 2.</p>
+      
+        <p>Even in defeat, his personality never fades. Whether declaring “<em>I’m ON vacation,</em>” shouting “<em>ONbelievable!</em>” after a wild shot, or delivering his favorite challenge — “<em>F**k a ten then talk to me,</em>” — Ghidotti remains one of the tournament’s great characters.</p>
+      
+        <p>Some competitors, including Huston, are quick to point out that Ghidotti has never closed the deal in a final. The question entering 2026 is simple: will this be the year Willy turns electric moments into a championship and finally gets the last word?</p>
+        `
       }
+      
       
   ]
 
