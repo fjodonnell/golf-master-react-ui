@@ -98,7 +98,38 @@ const articles = [
       
         <p>Some competitors, including Huston, are quick to point out that Ghidotti has never closed the deal in a final. The question entering 2026 is simple: will this be the year Willy turns electric moments into a championship and finally gets the last word?</p>
         `
+      },
+      {
+        id: 4,
+        title: 'TDS 2026 Tees Off in San Diego After Picture-Perfect Arrival',
+        publishedAt: '2026-02-21T08:00:00',
+        imageUrl: `${publicUrl}photos/SanDiegoHarbor.jpg`,
+        summary:
+          'Harbor views, Pacific sunsets, and an early bedtime — the contestants have arrived in San Diego and are set to open their week at Maderas Golf Club.',
+        author: 'Tournament du Sol Media Team',
+        content: `
+        <p>The Tournament du Sol has officially arrived in San Diego.</p>
+      
+        <p>After touching down in Southern California, the contestants checked into the InterContinental Hotel downtown, greeted by sweeping harbor views and sunshine that felt far removed from a long, brutal winter in central Ohio. The opening night was equal parts relaxed and refined — appetizers and drinks at the hotel bar overlooking the water, followed by a trip to Sunset Cliffs where the group watched the sun melt into the Pacific Ocean.</p>
+      
+        <p>The evening wrapped with a hearty seafood dinner in Ocean Beach, laughter echoing through the restaurant as stories from past TDS moments resurfaced. In a shocking development for a group known to stretch the night, every contestant was asleep by 8:30 p.m. Rested. Hydrated. Ready.</p>
+      
+        <p>Now, the real work begins.</p>
+      
+        <p>Saturday marks the first round of golf, with the players heading to Maderas Golf Club in Poway — a course known for stunning natural beauty and equal parts opportunity and danger. Desert canyons, dramatic elevation changes, and trouble lurking at nearly every turn await the field.</p>
+      
+        <p>One contestant summed it up best upon seeing the layout: “<em>Yeah, looks like a lot of danger for some boys who don’t know where the ball will be going.</em>”</p>
+      
+        <p>And that may be the theme of the day. After months of indoor simulators and limited practice, players are still searching for their swings. Confidence in short games — particularly chipping and putting — appears thin across the board. Early range sessions featured equal parts flushed irons and nervous glances.</p>
+      
+        <p>But that’s what these opening rounds are for: finding rhythm, building momentum, and shaking off the rust before official Tournament play begins Monday. Sunshine, ocean air, and 18 holes at Maderas should provide the perfect test.</p>
+      
+        <p>By sunset tonight, someone may have found something — a swing thought, a spark of confidence, a hint that they’re ready to contend. And someone else may be wondering how quickly winter can return.</p>
+      
+        <p>TDS 2026 is underway.</p>
+        `
       }
+      
       
       
   ]
