@@ -128,7 +128,71 @@ const articles = [
       
         <p>TDS 2026 is underway.</p>
         `
+      },
+      {
+        id: 5,
+        title: 'O’Donnell Elevates His Legacy with Sub-70 Breakthrough',
+        publishedAt: '2026-02-21T09:00:00',
+        imageUrl: `${publicUrl}photos/FrancisSwinging.jpg`,
+        summary:
+          'A smooth tempo, a signature butter fade, and now a round in the 60s — Francis O’Donnell adds a new milestone to his growing Tournament du Sol legacy.',
+        author: 'Tournament du Sol Media Team',
+        content: `
+        <p>If there is one word competitors use to describe Francis O’Donnell’s golf game, it’s <em>smooth</em>. The Chief Technology Officer has built his reputation on tempo — unhurried, repeatable, and lethal when it matters most. His signature butter fade doesn’t just find fairways; it sends a message. Control over chaos. Rhythm over force.</p>
+      
+        <p>That rhythm reached a new level this year since the last Tournament du Sol.</p>
+      
+        <p>O’Donnell broke 70, becoming just the second member of the group to accomplish the feat. In a field where low rounds are chased but rarely captured, cracking the 60s is more than a number — it’s a milestone. True to form, he didn’t overpower the course to get there. He dissected it. Fairways. Greens. Stress-free pars mixed with timely birdies. No theatrics. Just precision.</p>
+      
+        <p>Already a one-time champion, the sub-70 round adds another layer to a growing legacy.</p>
+      
+        <p>Still, as praise pours in, a familiar question lingers in the press tent: how will he hold up physically over the grind of another season? O’Donnell’s self-described “fragile body” has become part of tournament folklore — ice packs and KT tape appearing as routinely as range balls, and careful warmups that look more like a yoga retreat than a pre-round routine. Critics wonder whether seven straight days under the desert sun could test the limits of even the smoothest tempo.</p>
+      
+        <p>Supporters, however, see it differently. They argue that his measured swing is built for longevity — less violent torque, more efficiency. While others swing out of their shoes, O’Donnell swings within himself. And in a tournament known for attrition as much as artistry, that restraint may be his greatest competitive advantage.</p>
+      
+        <p>Smooth. Strategic. Slightly held together by athletic tape.</p>
+      
+        <p>As another season approaches, the question isn’t whether the fade will show up. It’s whether the body will cooperate long enough for it to matter.</p>
+        `
+      },
+      {
+        id: 6,
+        title: 'Rust Shaken, Putters Frozen at Maderas Practice Round',
+        publishedAt: '2026-02-22T08:00:00',
+        imageUrl: `${publicUrl}photos/Maderas2.jpg`,
+        summary:
+          'Darts on the first hole, doubles on the card, and a four-figure putter purchase — the 2026 contestants survived a challenging opening test at Maderas Golf Club.',
+        author: 'Tournament du Sol Media Team',
+        content: `
+        <p>Day 1 of Tournament du Sol 2026 delivered exactly what a proper opening act should: optimism, overconfidence, questionable scoring disputes, and a whole lot of rust.</p>
+      
+        <p>The morning began with what can only be described as a diversified breakfast portfolio. Leftover fish n’ chips were somehow reintroduced into circulation, followed by a full buffet at the InterContinental hotel restaurant, and capped off with a visit to an excellent local coffee shop. Fuel was not the issue.</p>
+      
+        <p>Before heading inland, the group made a pilgrimage up the coast to the Scotty Cameron Gallery in Encinitas. There, Francis O’Donnell made what may go down as one of the boldest equipment decisions in TDS history — an impulse purchase of a Scotty Cameron Phantom Black 5.5 putter for over $1,000 after taxes. It may have been the largest single hobby-related purchase of his life. These are the kinds of aggressive moves required when chasing greatness.</p>
+      
+        <p>By 1:00 PM, the contestants had arrived at Maderas Golf Club in Poway. After a thorough warmup session and plenty of practice strokes on the putting green, the first tee shots of the week were struck.</p>
+      
+        <p>And for a brief moment, it looked promising.</p>
+      
+        <p>All four players threw darts into the opening green. A statement start. Unfortunately, none of the birdie putts dropped — and from there, the round took a sharp turn. O’Donnell and Carpenter each carded two double bogeys. Ghidotti also recorded two doubles, though one controversial “v6” on a par five remains under review, with Huston firmly insisting it was a double. Huston himself struggled down the stretch, collecting three double bogeys on the closing nine holes.</p>
+      
+        <p>The putters were largely ice cold. Only two birdies were made by the entire group.</p>
+      
+        <p>Maderas proved to be a stern and unforgiving opening test. Trouble lurked everywhere, and any early-week rust was thoroughly exposed. Thankfully for the field, it was only a practice round.</p>
+      
+        <p><strong>Practice Round Scores:</strong><br/>
+        Alex Carpenter: 78<br/>
+        Francis O’Donnell: 81<br/>
+        Will Ghidotti: 84*<br/>
+        Zach Huston: 85</p>
+      
+        <p>With the opening round complete, the players now look forward to a well-earned Sunday off as they make the great migration to Palm Desert for the remainder of the week.</p>
+      
+        <p>The real competition begins bright and early Monday morning with a 6:40 AM tee time at Indian Wells Players, followed by round two that same afternoon at SilverRock Resort. The stage is set. The rust has been shaken. Now, it counts.</p>
+        `
       }
+      
+      
       
       
       
