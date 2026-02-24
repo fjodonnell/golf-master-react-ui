@@ -76,11 +76,11 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                 <CRow className="align-items-start g-0">
                     {/* LEFT SIDE */}
                     <CCol xs={5} className="d-flex flex-column align-items-center">
-                        <div 
-                            className="fw-bold mb-2 text-center w-100 px-1" 
-                            style={{ 
+                        <div
+                            className="fw-bold mb-2 text-center w-100 px-1"
+                            style={{
                                 fontSize: isMobile ? '0.9rem' : '1.1rem',
-                                color: isTeamMatch 
+                                color: isTeamMatch
                                     ? (isTeamWinner(match.teams[0]) ? winnerColor : defaultTextColor)
                                     : (match.playerWinner?.playerId === match.players[0].playerId ? winnerColor : defaultTextColor)
                             }}
@@ -120,11 +120,11 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
 
                     {/* RIGHT SIDE */}
                     <CCol xs={5} className="d-flex flex-column align-items-center">
-                        <div 
-                            className="fw-bold mb-2 text-center w-100 px-1" 
-                            style={{ 
+                        <div
+                            className="fw-bold mb-2 text-center w-100 px-1"
+                            style={{
                                 fontSize: isMobile ? '0.9rem' : '1.1rem',
-                                color: isTeamMatch 
+                                color: isTeamMatch
                                     ? (isTeamWinner(match.teams[1]) ? winnerColor : defaultTextColor)
                                     : (match.playerWinner?.playerId === match.players[1].playerId ? winnerColor : defaultTextColor)
                             }}
@@ -172,36 +172,109 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
 
                 {showUpdateForm && (
                     <div className="mt-3 p-3 border-top border-secondary">
-                        <h6 className="mb-3 small text-uppercase">Enter Match Result</h6>
-                        <div className="mb-3">
-                            <label className="small mb-1">Select Winner</label>
-                            <div className="d-flex flex-wrap gap-2">
-                                {(isTeamMatch ? match.teams : match.players).map((item) => (
-                                    <CButton
-                                        key={isTeamMatch ? item.teamName : item.playerId}
-                                        size="sm"
-                                        color={(winnerId === (isTeamMatch ? item.teamName : item.playerId)) ? 'success' : 'secondary'}
-                                        onClick={() => setWinnerId(isTeamMatch ? item.teamName : item.playerId)}
-                                    >
-                                        {isTeamMatch ? item.teamName : (item.playerNickname || item.playerId)}
-                                    </CButton>
-                                ))}
-                            </div>
+                    <h6 className="mb-3 small text-uppercase">Enter Match Result</h6>
+                    
+                    {/* Winner Selection */}
+                    <div className="mb-3">
+                        <label className="small mb-1">Select Winner</label>
+                        <div className="d-flex flex-wrap gap-2">
+                            {(isTeamMatch ? match.teams : match.players).map((item) => (
+                                <CButton
+                                    key={isTeamMatch ? item.teamName : item.playerId}
+                                    size="sm"
+                                    color={(winnerId === (isTeamMatch ? item.teamName : item.playerId)) ? 'success' : 'secondary'}
+                                    onClick={() => setWinnerId(isTeamMatch ? item.teamName : item.playerId)}
+                                >
+                                    {isTeamMatch ? item.teamName : (item.playerNickname || item.playerId)}
+                                </CButton>
+                            ))}
                         </div>
-                        <CRow className="g-2">
-                            <CCol xs={6}>
-                                <label className="small">Holes Won</label>
-                                <input type="number" className="form-control form-control-sm bg-dark text-white border-secondary" value={holesWon} onChange={(e) => setHolesWon(e.target.value)} />
-                            </CCol>
-                            <CCol xs={6}>
-                                <label className="small">Remaining</label>
-                                <input type="number" className="form-control form-control-sm bg-dark text-white border-secondary" value={holesRemainingInput} onChange={(e) => setHolesRemainingInput(e.target.value)} />
-                            </CCol>
-                        </CRow>
-                        <CButton color="success" size="sm" className="w-100 mt-3" disabled={saving} onClick={/*...keep your existing logic...*/ null}>
-                            {saving ? 'Saving...' : 'Submit Result'}
-                        </CButton>
                     </div>
+                
+                    {/* Inputs Row */}
+                    <CRow className="g-2">
+                        <CCol xs={6}>
+                            <label className="small">Holes Won</label>
+                            <input 
+                                type="number" 
+                                className="form-control form-control-sm bg-dark text-white border-secondary" 
+                                value={holesWon} 
+                                onChange={(e) => setHolesWon(e.target.value)} 
+                            />
+                        </CCol>
+                        <CCol xs={6}>
+                            <label className="small">Remaining</label>
+                            <input 
+                                type="number" 
+                                className="form-control form-control-sm bg-dark text-white border-secondary" 
+                                value={holesRemainingInput} 
+                                onChange={(e) => setHolesRemainingInput(e.target.value)} 
+                            />
+                        </CCol>
+                    </CRow>
+                
+                    {/* SINGLE Corrected Submit Button */}
+                    <CButton
+                        color="success"
+                        size="sm"
+                        className="w-100 mt-3"
+                        disabled={saving}
+                        onClick={async () => {
+                            setSaving(true);
+                
+                            let teamWinner = null;
+                            let teamLoser = null;
+                            let playerWinner = null;
+                            let playerLoser = null;
+                
+                            if (isTeamMatch) {
+                                teamWinner = match.teams.find(t => t.teamName === winnerId) || null;
+                                teamLoser = match.teams.find(t => t.teamName !== winnerId) || null;
+                            } else if (isSinglesMatch) {
+                                playerWinner = match.players.find(p => p.playerId === winnerId) || null;
+                                playerLoser = match.players.find(p => p.playerId !== winnerId) || null;
+                            }
+                
+                            const updated = {
+                                matchId: match.matchId,
+                                matchName: match.matchName,
+                                matchNumber: match.matchNumber,
+                                holesWonBy: Number(holesWon),
+                                holesRemaining: Number(holesRemainingInput),
+                                round: { roundId: match.round.roundId },
+                                players: match.players?.map(p => ({ playerId: p.playerId })) || [],
+                                teams: match.teams?.map(t => ({ teamName: t.teamName })) || [],
+                                teamWinner: teamWinner ? { teamName: teamWinner.teamName } : null,
+                                teamLoser: teamLoser ? { teamName: teamLoser.teamName } : null,
+                                playerWinner: playerWinner ? { playerId: playerWinner.playerId } : null,
+                                playerLoser: playerLoser ? { playerId: playerLoser.playerId } : null
+                            };
+                
+                            try {
+                                const response = await fetch(`https://golf-master-backend.onrender.com/match/${match.matchId}`, {
+                                    method: 'PUT',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(updated),
+                                });
+                
+                                if (!response.ok) {
+                                    const errorText = await response.text();
+                                    console.error('Server Error:', errorText);
+                                    alert(`Save failed: ${response.status}`);
+                                } else {
+                                    if (typeof refreshMatches === 'function') await refreshMatches();
+                                    setShowUpdateForm(false);
+                                }
+                            } catch (err) {
+                                console.error('Network Error:', err);
+                            } finally {
+                                setSaving(false);
+                            }
+                        }}
+                    >
+                        {saving ? 'Saving...' : 'Submit Result'}
+                    </CButton>
+                </div>
                 )}
 
                 <CCollapse visible={expanded} className="mt-3">
@@ -212,11 +285,11 @@ const MatchCard = ({ match, fetchRoundScores, refreshMatches }) => {
                             {playerScores.map((s) => (
                                 <CListGroupItem key={s.scoreId} className="px-0 py-2 d-flex align-items-center bg-transparent border-secondary border-top text-white">
                                     <CCardImage src={`${publicUrl}avatars/${s.player.playerId}.jpg`} style={{ width: 35, height: 35, borderRadius: '50%', marginRight: '10px' }} />
-                                    <div className="flex-grow-1 small fw-bold text-truncate" style={{maxWidth: '80px'}}>{s.player.playerId}</div>
+                                    <div className="flex-grow-1 small fw-bold text-truncate" style={{ maxWidth: '80px' }}>{s.player.playerId}</div>
                                     <div className="d-flex gap-3 text-center ms-auto">
-                                        <div><div className="fw-bold small">{s.pointsEarned}</div><div className="text-muted" style={{fontSize: '0.6rem'}}>PTS</div></div>
-                                        <div><div className="fw-bold small">{s.score}</div><div className="text-muted" style={{fontSize: '0.6rem'}}>SCR</div></div>
-                                        <div><div className="fw-bold small">+{s.scoreToPar}</div><div className="text-muted" style={{fontSize: '0.6rem'}}>PAR</div></div>
+                                        <div><div className="fw-bold small">{s.pointsEarned}</div><div className="text-muted" style={{ fontSize: '0.6rem' }}>PTS</div></div>
+                                        <div><div className="fw-bold small">{s.score}</div><div className="text-muted" style={{ fontSize: '0.6rem' }}>SCR</div></div>
+                                        <div><div className="fw-bold small">+{s.scoreToPar}</div><div className="text-muted" style={{ fontSize: '0.6rem' }}>PAR</div></div>
                                     </div>
                                 </CListGroupItem>
                             ))}
