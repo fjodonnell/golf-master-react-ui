@@ -412,7 +412,110 @@ const articles = [
       
         <p>The desert chapter closes. The competitors return to their desk jobs — sunburned, exhausted, and already counting down to next year.</p>
         `
+      },
+      {
+        id: 12,
+        title: 'O’Donnell Outlasts Carpenter in Firecliff Classic, Claims Second TDS Crown',
+        publishedAt: '2026-03-01T14:00:00',
+        imageUrl: `${publicUrl}photos/DesertWillowFirecliff2.jpg`,
+        summary:
+          'After a week-long duel for low gross honors, Francis O’Donnell defeated Alex Carpenter 2&1 at Firecliff, capturing his second Tournament du Sol title in a final that unfolded in waves of pressure and precision.',
+        author: 'Tournament du Sol Media Team',
+        content: `
+        <p>The 2026 Tournament du Sol Final felt inevitable long before the first tee shot was struck at Desert Willow Firecliff.</p>
+      
+        <p>Throughout qualifying, Alex Carpenter and Francis O’Donnell had risen steadily above the field, trading low gross honors as if rehearsing for the final act. Carpenter secured three outright low rounds and a tie. O’Donnell claimed two and a tie of his own. Their back-and-forth 71s at Trilogy — a round that felt like a private duel inside a larger tournament — now reads as foreshadowing.</p>
+      
+        <p>By Saturday morning, there was no mystery about who deserved to be there.</p>
+      
+        <p><strong>A Championship Begins at Sunrise</strong></p>
+      
+        <p>The match began at 6:40 a.m., Firecliff glowing in the early desert light. Beloved by TDS competitors for its bold visuals and risk-reward opportunities, the course promised drama if the players allowed it.</p>
+      
+        <p>Carpenter opened with authority, driving the ball down the heart of the first fairway. As O’Donnell stepped onto the tee, one competitor joked, “He hasn’t missed a fairway since 1997.” The humor carried weight. O’Donnell delivered a buttercut straight down Broadway.</p>
+      
+        <p>The tone was set.</p>
+      
+        <p>The opening six holes unfolded like a carefully played chess match. Each hole ended in a tie. Carpenter looked slightly sharper early, flagging approaches and giving himself legitimate birdie chances. But the putts refused to fall — edges burned, lips caught, momentum stalled.</p>
+      
+        <p>O’Donnell, meanwhile, weathered the storm. Twice he relied on precise short-game touch to escape with halves, keeping the match all square as they reached the par-5 7th.</p>
+      
+        <p><strong>The Middle Third: Momentum Emerges</strong></p>
+      
+        <p>The reachable 7th finally produced separation. O’Donnell launched a towering drive down the center. Carpenter found a fairway bunker right. From perfect position, O’Donnell ripped a 5-wood just short of the green and chipped close for birdie.</p>
+      
+        <p>1 up.</p>
+      
+        <p>At the short but intimidating par-3 8th, water guarding the entire left side, O’Donnell played safely to the center of the green. Carpenter pulled his wedge left and watched it bound into the hazard.</p>
+      
+        <p>2 up — and suddenly the energy shifted.</p>
+      
+        <p>But champions respond.</p>
+      
+        <p>On the 9th, Carpenter stuffed an iron to eight feet. O’Donnell answered with an electric downhill par save to post one-under 35 on the front. Carpenter calmly poured in his birdie to cut the deficit to 1 down at the turn.</p>
+      
+        <p>“I wanted to make him work for everything,” O’Donnell said. “No freebies.”</p>
+      
+        <p><strong>The Back Nine: Pressure Builds</strong></p>
+      
+        <p>After a sunscreen reset, the final nine holes of the 2026 TDS began.</p>
+      
+        <p>Carpenter seized an opening on 11 when O’Donnell chunked an approach and failed to save par. Carpenter converted a clutch par putt of his own, tying the match. Through 11 holes, neither man would yield.</p>
+      
+        <p>The tension deepened on 12, where both players found the green in regulation. O’Donnell lagged beautifully from 25 feet. Carpenter’s uphill birdie try from 15 feet looked pure until the final revolution. It slid by.</p>
+      
+        <p>The match remained all square.</p>
+      
+        <p>Then came the 13th — a reachable par 5 that would define the championship.</p>
+      
+        <p>Both players split the fairway, O’Donnell holding a slight distance advantage. Carpenter took an aggressive line with 3-wood but flared it dramatically right into the desert waste. The door opened.</p>
+      
+        <p>O’Donnell faced his decision. “He’ll still make par,” he told himself. “He’s too good. Stay aggressive.”</p>
+      
+        <p>A perfectly struck heel-cut 5-wood bounded just short of the green. A deft Texas wedge led to a tap-in birdie.</p>
+      
+        <p>1 up, with momentum firmly in hand.</p>
+      
+        <p>The final stretch tested both players. Carpenter produced short-game brilliance on 15 to deny O’Donnell an extension. On 16, O’Donnell faced a nervy three-footer after leaving his lag short — and buried it to cling to a 1 up lead with two to play.</p>
+      
+        <p><strong>The Defining Swing</strong></p>
+      
+        <p>Firecliff’s 17th demands courage: 186 yards over water, hazard wrapping right.</p>
+      
+        <p>O’Donnell struck a committed 6-iron to the back-left quadrant of the green.</p>
+      
+        <p>Carpenter, needing something special, sent a towering iron directly at the flag. “Be Expensive!” Ghidotti yelled as it flew.</p>
+      
+        <p>It carried too far.</p>
+      
+        <p>The ball bounded over the green and into a waste bunker.</p>
+      
+        <p>Carpenter’s bunker shot was excellent, leaving ten feet for par. O’Donnell lagged beautifully from 30 feet to inside two.</p>
+      
+        <p>Carpenter’s putt slid just right.</p>
+      
+        <p>The stage belonged to O’Donnell.</p>
+      
+        <p>From two feet, steadying his hands and exhaling deeply, he rolled the putt into the left side of the cup.</p>
+      
+        <p>O’Donnell 2&1.</p>
+      
+        <p>The final would not reach the 18th tee.</p>
+      
+        <p><strong>A Week That Elevated the Standard</strong></p>
+      
+        <p>The victory marks O’Donnell’s second Tournament du Sol title — his second Finals win over Carpenter — evening their championship totals at two apiece and moving his Finals record to 2–1.</p>
+      
+        <p>His form down the stretch defined the tournament: a 74 at Morningside to capture his first low gross of the week, followed by three exceptional 71s in his final four rounds, including the championship match. He played under par when it mattered most.</p>
+      
+        <p>For Carpenter, the loss stings. The opportunities to build separation on the front nine were there, but a cold putter refused to cooperate. Still, his body of work throughout the week reinforces his status as a perennial contender. The two-time champion will be back.</p>
+      
+        <p>After 144 holes of desert golf, laughter, and rising stakes, the 2026 chapter closes with the bar set even higher.</p>
+      
+        <p>The question now shifts forward: who will elevate next?</p>
+        `
       }
+      
       
       
       
