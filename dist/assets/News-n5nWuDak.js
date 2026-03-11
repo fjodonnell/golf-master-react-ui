@@ -1,29 +1,4 @@
-import React, { useState } from 'react'
-import {
-    CCard,
-    CCardBody,
-    CCardImage,
-    CCardTitle,
-    CCardText,
-    CButton,
-    CCol,
-    CRow,
-} from '@coreui/react'
-
-// Dynamic base path for GitHub Pages
-const publicUrl = import.meta.env.BASE_URL;
-
-// 🧾 Mock articles data
-const articles = [
-    {
-        id: 1,
-        title: 'Huston Looks to Go Back to Back in 2026',
-        publishedAt: '2025-11-10T09:00:00',
-        imageUrl: `${publicUrl}photos/ZachSwinging.jpg`,
-        summary:
-            'Coming off a monumental TDS victory in 2025, the 32 year old Utahn feels that his best golf is still ahead. Find out why in our exclusive interview with the champ.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+import{a as h,j as t}from"./index-BPsASDuK.js";import{C as l,a as d}from"./CRow-B_-zPyXM.js";import{C as p,a as u}from"./CCardBody-BwOjJZAA.js";import{b as c,C as m,a as g}from"./CCardTitle-BwZ2s6Kw.js";import{a as f}from"./index.esm-BoviYutb.js";const a="/golf-master-react-ui/",w=[{id:1,title:"Huston Looks to Go Back to Back in 2026",publishedAt:"2025-11-10T09:00:00",imageUrl:`${a}photos/ZachSwinging.jpg`,summary:"Coming off a monumental TDS victory in 2025, the 32 year old Utahn feels that his best golf is still ahead. Find out why in our exclusive interview with the champ.",author:"Tournament du Sol Media Team",content:`
   <p>After years of near-misses and heartbreak, Zach Huston finally broke through in 2025 — and he didn’t just win, he <em>dominated</em>. Now, as the 2026 Tournament du Sol looms, the reigning champion returns with one goal in mind: go back-to-back.</p>
   
   <p>For the first four years of TDS, Huston couldn’t quite get over the hump. Each season seemed to end the same way — flashes of brilliance followed by late-round struggles that kept him from reaching the prestigious TDS Final. His biggest critic wasn’t a journalist or fan, but his longtime rival and friend, Will Ghidotti, who loved to remind him, “<em>Make a TDS Final, then talk to me.</em>”</p>
@@ -41,17 +16,7 @@ const articles = [
   <p>Now, one year later, the target is squarely on Huston’s back. But if 2025 taught us anything, it’s that Zach Huston doesn’t shy away from pressure — he thrives in it.</p>
   
   <p>The 2026 Tournament du Sol is shaping up to be one for the ages. And if Huston has his way, it may end the same way as last year: with the champ walking tall and a familiar smirk crossing his face.</p>
-  `
-    },
-    {
-        id: 2,
-        title: 'Carpenter Eyes Redemption After La Purisima Nightmare',
-        publishedAt: '2026-02-15T09:00:00',
-        imageUrl: `${publicUrl}photos/AlexSwinging.jpg`,
-        summary:
-            'A two-time champion, a haunted putter, and unfinished business — Alex Carpenter enters 2026 determined to reclaim his place at the top of TDS.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+  `},{id:2,title:"Carpenter Eyes Redemption After La Purisima Nightmare",publishedAt:"2026-02-15T09:00:00",imageUrl:`${a}photos/AlexSwinging.jpg`,summary:"A two-time champion, a haunted putter, and unfinished business — Alex Carpenter enters 2026 determined to reclaim his place at the top of TDS.",author:"Tournament du Sol Media Team",content:`
         <p>Few players in Tournament du Sol history have matched the sustained excellence of Alex Carpenter. A back-to-back champion in 2023 and 2024, Carpenter built a reputation as the tournament’s steadiest competitor — the kind of player who rarely beat himself and almost never blinked under pressure.</p>
       
         <p>His first title came in unforgettable fashion. Facing FJ O'Donnell at Eagle Falls in 2023, Carpenter stood on the final hole all square and needing something special. What followed was the stuff of TDS lore — a pure approach and a clutch birdie that flipped the match and delivered a 1 UP victory. It was a breakthrough moment that announced Carpenter as a force to be reckoned with.</p>
@@ -71,17 +36,7 @@ const articles = [
         <p>Even so, counting Carpenter out would be a mistake. Teammates and competitors alike still call him the most consistent player TDS has seen. His track record proves it, and champions rarely stay down for long.</p>
       
         <p>As 2026 approaches, Carpenter isn’t talking about curses or equipment. He’s talking about preparation, patience, and getting back to the formula that made him great. A return to the TDS Final would surprise no one — and another trophy might surprise even fewer.</p>
-        `
-    },
-    {
-        id: 3,
-        title: 'Ghidotti Chases Breakthrough After Back-to-Back Heartbreaks',
-        publishedAt: '2026-02-17T20:00:00',
-        imageUrl: `${publicUrl}photos/WillSwinging.jpg`,
-        summary:
-            'Electric, unpredictable, and always entertaining — Will Ghidotti returns to TDS 2026 still hunting the one prize that has eluded him.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:3,title:"Ghidotti Chases Breakthrough After Back-to-Back Heartbreaks",publishedAt:"2026-02-17T20:00:00",imageUrl:`${a}photos/WillSwinging.jpg`,summary:"Electric, unpredictable, and always entertaining — Will Ghidotti returns to TDS 2026 still hunting the one prize that has eluded him.",author:"Tournament du Sol Media Team",content:`
         <p>If there is one word competitors use to describe Will Ghidotti’s golf game, it’s <em>electric</em>. At any given moment, “Wedge Willy” can reach a par five in two and drain an eagle putt that leaves the group speechless. He can just as easily launch a 330-yard drive into what some now jokingly call the Bezosphere, sending the ball ricocheting down a wealthy Palm Desert street and into a backyard pool. With Ghidotti, you truly never know what’s coming next.</p>
       
         <p>What is certain is that he knows how to get to the big stage. Ghidotti has reached the TDS Final in each of the past two years — a feat few can claim. Yet the trophy has remained just out of reach, leaving him as the only active player without a victory in the finals.</p>
@@ -97,17 +52,7 @@ const articles = [
         <p>Even in defeat, his personality never fades. Whether declaring “<em>I’m ON vacation,</em>” or shouting “<em>ONbelievable!</em>” after a wild shot, — Ghidotti remains one of the tournament’s great characters.</p>
       
         <p>Some competitors, including Huston, are quick to point out that Ghidotti has never closed the deal in a final. The question entering 2026 is simple: will this be the year Willy turns electric moments into a championship and finally gets the last word?</p>
-        `
-    },
-    {
-        id: 4,
-        title: 'TDS 2026 Tees Off in San Diego After Picture-Perfect Arrival',
-        publishedAt: '2026-02-21T08:00:00',
-        imageUrl: `${publicUrl}photos/Maderas.jpg`,
-        summary:
-            'Harbor views, Pacific sunsets, and an early bedtime — the contestants have arrived in San Diego and are set to open their week at Maderas Golf Club.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:4,title:"TDS 2026 Tees Off in San Diego After Picture-Perfect Arrival",publishedAt:"2026-02-21T08:00:00",imageUrl:`${a}photos/Maderas.jpg`,summary:"Harbor views, Pacific sunsets, and an early bedtime — the contestants have arrived in San Diego and are set to open their week at Maderas Golf Club.",author:"Tournament du Sol Media Team",content:`
         <p>The Tournament du Sol has officially arrived in San Diego.</p>
       
         <p>After touching down in Southern California, the contestants checked into the InterContinental Hotel downtown, greeted by sweeping harbor views and sunshine that felt far removed from a long, brutal winter in central Ohio. The opening night was equal parts relaxed and refined — appetizers and drinks at the hotel bar overlooking the water, followed by a trip to Sunset Cliffs where the group watched the sun melt into the Pacific Ocean.</p>
@@ -127,17 +72,7 @@ const articles = [
         <p>By sunset tonight, someone may have found something — a swing thought, a spark of confidence, a hint that they’re ready to contend. And someone else may be wondering how quickly winter can return.</p>
       
         <p>TDS 2026 is underway.</p>
-        `
-    },
-    {
-        id: 5,
-        title: 'O’Donnell Elevates His Legacy with Sub-70 Breakthrough',
-        publishedAt: '2026-02-21T09:00:00',
-        imageUrl: `${publicUrl}photos/FrancisSwinging.jpg`,
-        summary:
-            'A smooth tempo, a signature butter fade, and now a round in the 60s — Francis O’Donnell adds a new milestone to his growing Tournament du Sol legacy.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:5,title:"O’Donnell Elevates His Legacy with Sub-70 Breakthrough",publishedAt:"2026-02-21T09:00:00",imageUrl:`${a}photos/FrancisSwinging.jpg`,summary:"A smooth tempo, a signature butter fade, and now a round in the 60s — Francis O’Donnell adds a new milestone to his growing Tournament du Sol legacy.",author:"Tournament du Sol Media Team",content:`
         <p>If there is one word competitors use to describe Francis O’Donnell’s golf game, it’s <em>smooth</em>. The Chief Technology Officer has built his reputation on tempo — unhurried, repeatable, and lethal when it matters most. His signature butter fade doesn’t just find fairways; it sends a message. Control over chaos. Rhythm over force.</p>
       
         <p>That rhythm reached a new level this year since the last Tournament du Sol.</p>
@@ -153,17 +88,7 @@ const articles = [
         <p>Smooth. Strategic. Slightly held together by athletic tape.</p>
       
         <p>As another season approaches, the question isn’t whether the fade will show up. It’s whether the body will cooperate long enough for it to matter.</p>
-        `
-    },
-    {
-        id: 6,
-        title: 'Rust Shaken, Putters Frozen at Maderas Practice Round',
-        publishedAt: '2026-02-22T08:00:00',
-        imageUrl: `${publicUrl}photos/Maderas2.jpg`,
-        summary:
-            'Darts on the first hole, doubles on the card, and a four-figure putter purchase — the 2026 contestants survived a challenging opening test at Maderas Golf Club.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:6,title:"Rust Shaken, Putters Frozen at Maderas Practice Round",publishedAt:"2026-02-22T08:00:00",imageUrl:`${a}photos/Maderas2.jpg`,summary:"Darts on the first hole, doubles on the card, and a four-figure putter purchase — the 2026 contestants survived a challenging opening test at Maderas Golf Club.",author:"Tournament du Sol Media Team",content:`
         <p>Day 1 of Tournament du Sol 2026 delivered exactly what a proper opening act should: optimism, overconfidence, questionable scoring disputes, and a whole lot of rust.</p>
       
         <p>The morning began with what can only be described as a diversified breakfast portfolio. Leftover fish n’ chips were somehow reintroduced into circulation, followed by a full buffet at the InterContinental hotel restaurant, and capped off with a visit to an excellent local coffee shop. Fuel was not the issue.</p>
@@ -189,17 +114,7 @@ const articles = [
         <p>With the opening round complete, the players now look forward to a well-earned Sunday off as they make the great migration to Palm Desert for the remainder of the week.</p>
       
         <p>The real competition begins bright and early Monday morning with a 6:40 AM tee time at Indian Wells Players, followed by round two that same afternoon at SilverRock Resort. The stage is set. The rust has been shaken. Now, it counts.</p>
-        `
-    },
-    {
-        id: 7,
-        title: 'Carpenter Builds Early Empire on 36-Hole Opening Day',
-        publishedAt: '2026-02-25T07:30:00',
-        imageUrl: `${publicUrl}photos/SilverRock.jpg`,
-        summary:
-            'A 5:10 AM wake-up call, 36 grueling holes, and a scoring explosion from Alex Carpenter have reshaped the TDS landscape after day one.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:7,title:"Carpenter Builds Early Empire on 36-Hole Opening Day",publishedAt:"2026-02-25T07:30:00",imageUrl:`${a}photos/SilverRock.jpg`,summary:"A 5:10 AM wake-up call, 36 grueling holes, and a scoring explosion from Alex Carpenter have reshaped the TDS landscape after day one.",author:"Tournament du Sol Media Team",content:`
         <p>Day one of Tournament du Sol competition began in darkness.</p>
       
         <p>Alarm clocks rang at 5:10 AM. Coffee was secured at IW Coffee & Chai Bar before sunrise. The group arrived at Indian Wells Players to a chilly driving range where warmup swings were described as “functional at best.” By the time the first tee shots were struck, the sun was finally rising over the desert.</p>
@@ -241,17 +156,7 @@ const articles = [
         Ghidotti: 3.5</p>
       
         <p>The tournament now shifts to The Club at Morningside for round three, where pristine greens and elite conditions await. The question is no longer who leads — it’s whether anyone can slow Carpenter down.</p>
-        `
-    },
-    {
-        id: 8,
-        title: 'Nomadic Golfers Dominate at Morningside, Momentum Shifts Entering Moving Day',
-        publishedAt: '2026-02-26T08:00:00',
-        imageUrl: `${publicUrl}photos/Morningside.jpg`,
-        summary:
-            'A 5&4 statement victory, two houses struck, and rising tensions headline a dramatic day at The Club at Morningside.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:8,title:"Nomadic Golfers Dominate at Morningside, Momentum Shifts Entering Moving Day",publishedAt:"2026-02-26T08:00:00",imageUrl:`${a}photos/Morningside.jpg`,summary:"A 5&4 statement victory, two houses struck, and rising tensions headline a dramatic day at The Club at Morningside.",author:"Tournament du Sol Media Team",content:`
         <p>Under pristine desert skies at The Club at Morningside, course conditions were nothing short of immaculate. Pure fairways. Lightning-fast greens. Not a blade of grass out of place.</p>
       
         <p>What followed, however, was far less balanced.</p>
@@ -283,17 +188,7 @@ const articles = [
         <p>Moving Day looms large Thursday with rounds scheduled at Trilogy and the formidable PGA West Norman Course. If Morningside was a statement, the next 36 holes may define the championship arc. The round at Trilogy will feature a rematch, with the Nomadic Golfers looking to complete the sweep of SAAMOOOKAS.</p>
       
         <p>In a week already filled with drama, one thing is clear: leaderboards shift, tempers flare, and occasionally, homeowners duck.</p>
-        `
-    },
-    {
-        id: 9,
-        title: 'Final Set After 54-Hole Sprint Through Desert Heat',
-        publishedAt: '2026-02-27T16:30:00',
-        imageUrl: `${publicUrl}photos/Norman.jpg`,
-        summary:
-            'A 28-hour, 54-hole dash through triple-digit heat has set the stage for the 2026 TDS Final at Desert Willow Firecliff.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:9,title:"Final Set After 54-Hole Sprint Through Desert Heat",publishedAt:"2026-02-27T16:30:00",imageUrl:`${a}photos/Norman.jpg`,summary:"A 28-hour, 54-hole dash through triple-digit heat has set the stage for the 2026 TDS Final at Desert Willow Firecliff.",author:"Tournament du Sol Media Team",content:`
         <p>The TDS Final is set.</p>
       
         <p>Over a grueling 28-hour stretch, the contestants completed a 54-hole sprint to close qualifying play — battling 97-degree heat, firm desert layouts, and the mounting pressure of a shrinking leaderboard.</p>
@@ -343,17 +238,7 @@ const articles = [
         <p>The stage is set for the TDS Final and Third Place Match at Desert Willow Firecliff. Tee times begin at 6:40 AM — an early start in hopes of beating the relentless California desert heat.</p>
       
         <p>Three days. Six rounds. Fifty-four holes. And now, it all comes down to one final match.</p>
-        `
-    },
-    {
-        id: 10,
-        title: 'Redemption on 18: Ghidotti Flips the Script in Consolation Clash',
-        publishedAt: '2026-02-28T14:00:00',
-        imageUrl: `${publicUrl}photos/DesertWillowFirecliff.jpg`,
-        summary:
-            'One year after heartbreak, Will Ghidotti steadied himself down the stretch and closed out Zach Huston 2 up in a rivalry rematch at Firecliff.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:10,title:"Redemption on 18: Ghidotti Flips the Script in Consolation Clash",publishedAt:"2026-02-28T14:00:00",imageUrl:`${a}photos/DesertWillowFirecliff.jpg`,summary:"One year after heartbreak, Will Ghidotti steadied himself down the stretch and closed out Zach Huston 2 up in a rivalry rematch at Firecliff.",author:"Tournament du Sol Media Team",content:`
         <p>There would be no back-nine charge this time.</p>
       
         <p>Well… almost.</p>
@@ -411,17 +296,7 @@ const articles = [
         <p>The rivalry endures. It will surface again.</p>
       
         <p>The desert chapter closes. The competitors return to their desk jobs — sunburned, exhausted, and already counting down to next year.</p>
-        `
-    },
-    {
-        id: 12,
-        title: 'O’Donnell Outlasts Carpenter in Firecliff Classic, Claims Second TDS Crown',
-        publishedAt: '2026-03-01T14:00:00',
-        imageUrl: `${publicUrl}photos/DesertWillowFirecliff2.jpg`,
-        summary:
-            'After a week-long duel for low gross honors, Francis O’Donnell defeated Alex Carpenter 2&1 at Firecliff, capturing his second Tournament du Sol title in a final that unfolded in waves of pressure and precision.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:12,title:"O’Donnell Outlasts Carpenter in Firecliff Classic, Claims Second TDS Crown",publishedAt:"2026-03-01T14:00:00",imageUrl:`${a}photos/DesertWillowFirecliff2.jpg`,summary:"After a week-long duel for low gross honors, Francis O’Donnell defeated Alex Carpenter 2&1 at Firecliff, capturing his second Tournament du Sol title in a final that unfolded in waves of pressure and precision.",author:"Tournament du Sol Media Team",content:`
         <p>The 2026 Tournament du Sol Final felt inevitable long before the first tee shot was struck at Desert Willow Firecliff.</p>
       
         <p>Throughout qualifying, Alex Carpenter and Francis O’Donnell had risen steadily above the field, trading low gross honors as if rehearsing for the final act. Carpenter secured three outright low rounds and a tie. O’Donnell claimed two and a tie of his own. Their back-and-forth 71s at Trilogy — a round that felt like a private duel inside a larger tournament — now reads as foreshadowing.</p>
@@ -513,17 +388,7 @@ const articles = [
         <p>After 144 holes of desert golf, laughter, and rising stakes, the 2026 chapter closes with the bar set even higher.</p>
       
         <p>The question now shifts forward: who will elevate next?</p>
-        `
-    },
-    {
-        id: 13,
-        title: 'Life After TDS: The Field Returns to Reality',
-        publishedAt: '2026-03-07T14:00:00',
-        imageUrl: `${publicUrl}photos/Columbus.jpg`,
-        summary:
-            'With Tournament du Sol concluded, competitors return to their day jobs — but the stories, speculation, and lingering drama from the desert continue to ripple through the field.',
-        author: 'Tournament du Sol Media Team',
-        content: `
+        `},{id:13,title:"Life After TDS: The Field Returns to Reality",publishedAt:"2026-03-07T14:00:00",imageUrl:`${a}photos/Columbus.jpg`,summary:"With Tournament du Sol concluded, competitors return to their day jobs — but the stories, speculation, and lingering drama from the desert continue to ripple through the field.",author:"Tournament du Sol Media Team",content:`
         <p>The fairways are quiet again.</p>
       
         <p>The carts are parked. The group chats have slowed. And the competitors of Tournament du Sol have returned to the one place none of them truly belong: their desk jobs.</p>
@@ -583,74 +448,4 @@ const articles = [
         <p>But the itch for more golf has already begun. ⛳️</p>
       
         <p>And somewhere, tucked neatly under a blanket in a quiet spare bedroom, “Comma” waits patiently for its next appearance.</p>
-        `
-    }
-
-
-
-
-]
-
-const News = () => {
-    const [expandedArticleId, setExpandedArticleId] = useState(null)
-
-    const toggleExpand = (id) => {
-        setExpandedArticleId(expandedArticleId === id ? null : id)
-    }
-
-    // Sort newest to oldest
-    const sortedArticles = [...articles].sort(
-        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
-    )
-
-    return (
-        <div className="px-2 py-4"> {/* Narrower horizontal padding for mobile */}
-            <h2 className="text-center mb-4 fw-bold">Tournament du Sol News</h2>
-            <CRow className="justify-content-center g-0"> {/* g-0 removes row gutters if needed */}
-                {sortedArticles.map((article) => (
-                    <CCol xs={12} md={8} key={article.id} className="mb-4 px-1">
-                        <CCard className="shadow-sm border-0">
-                            <CCardImage
-                                orientation="top"
-                                src={article.imageUrl}
-                                style={{ objectFit: 'cover', height: '280px' }}
-                            />
-                            <CCardBody>
-                                <CCardTitle className="fw-bold fs-4 mb-2">
-                                    {article.title}
-                                </CCardTitle>
-                                <p className="text-muted mb-1">
-                                    By {article.author} •{' '}
-                                    {new Date(article.publishedAt).toLocaleDateString()}
-                                </p>
-
-                                {expandedArticleId === article.id ? (
-                                    <div
-                                        className="mt-3"
-                                        style={{ lineHeight: '1.6', fontSize: '1rem' }}
-                                        dangerouslySetInnerHTML={{ __html: article.content.trim() }}
-                                    ></div>
-                                ) : (
-                                    <CCardText className="mt-3">{article.summary}</CCardText>
-                                )}
-
-
-                                <div className="text-center mt-3">
-                                    <CButton
-                                        color="secondary"
-                                        variant="outline"
-                                        onClick={() => toggleExpand(article.id)}
-                                    >
-                                        {expandedArticleId === article.id ? 'Show Less' : 'Read More'}
-                                    </CButton>
-                                </div>
-                            </CCardBody>
-                        </CCard>
-                    </CCol>
-                ))}
-            </CRow>
-        </div>
-    )
-}
-
-export default News
+        `}],S=()=>{const[o,r]=h.useState(null),i=e=>{r(o===e?null:e)},s=[...w].sort((e,n)=>new Date(n.publishedAt)-new Date(e.publishedAt));return t.jsxs("div",{className:"px-2 py-4",children:[" ",t.jsx("h2",{className:"text-center mb-4 fw-bold",children:"Tournament du Sol News"}),t.jsxs(l,{className:"justify-content-center g-0",children:[" ",s.map(e=>t.jsx(d,{xs:12,md:8,className:"mb-4 px-1",children:t.jsxs(p,{className:"shadow-sm border-0",children:[t.jsx(c,{orientation:"top",src:e.imageUrl,style:{width:"100%",aspectRatio:"16 / 9",objectFit:"cover",objectPosition:"center",minHeight:"200px",display:"block"},onError:n=>{console.error("Path failed on this device:",n.target.src),n.target.style.border="2px solid red"}}),t.jsxs(u,{children:[t.jsx(m,{className:"fw-bold fs-4 mb-2",children:e.title}),t.jsxs("p",{className:"text-muted mb-1",children:["By ",e.author," •"," ",new Date(e.publishedAt).toLocaleDateString()]}),o===e.id?t.jsx("div",{className:"mt-3",style:{lineHeight:"1.6",fontSize:"1rem"},dangerouslySetInnerHTML:{__html:e.content.trim()}}):t.jsx(g,{className:"mt-3",children:e.summary}),t.jsx("div",{className:"text-center mt-3",children:t.jsx(f,{color:"secondary",variant:"outline",onClick:()=>i(e.id),children:o===e.id?"Show Less":"Read More"})})]})]})},e.id))]})]})};export{S as default};
